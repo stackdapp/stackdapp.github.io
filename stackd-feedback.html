@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackd — Beta Feedback</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0a0f0e;
+  --bg2:#111a18;
+  --panel:#172220;
+  --border:#1e3330;
+  --teal:#0D9488;
+  --teal2:#14b8a6;
+  --teal-dim:rgba(13,148,136,.12);
+  --txt:#e8f5f3;
+  --txt2:#8ab8b3;
+  --txt3:#4a7a75;
+  --xp:#f0a500;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;min-height:100vh;padding-bottom:60px;}
+
+/* Grid bg */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:40px 40px;
+  opacity:.4;pointer-events:none;z-index:0;
+}
+
+.wrap{max-width:600px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+
+/* HERO */
+.hero{padding:56px 0 40px;text-align:center;}
+.logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;}
+.logo-icon{width:40px;height:40px;background:var(--teal);border-radius:10px;
+  display:flex;flex-direction:column;justify-content:center;gap:4px;padding:9px 8px;}
+.bar{background:#fff;border-radius:3px;height:4px;}
+.bar:nth-child(1){width:100%;}
+.bar:nth-child(2){width:74%;}
+.bar:nth-child(3){width:50%;}
+.logo-name{font-size:22px;font-weight:800;color:var(--txt);letter-spacing:-.4px;}
+.logo-name span{color:var(--teal);}
+
+.hero-tag{display:inline-block;background:var(--teal-dim);color:var(--teal2);
+  font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;
+  letter-spacing:.6px;text-transform:uppercase;margin-bottom:18px;
+  border:1px solid rgba(13,148,136,.25);}
+.hero h1{font-size:32px;font-weight:800;letter-spacing:-.7px;line-height:1.2;margin-bottom:12px;}
+.hero h1 span{color:var(--teal);}
+.hero p{font-size:15px;color:var(--txt2);line-height:1.7;max-width:480px;margin:0 auto;}
+
+/* NPS row */
+.nps-note{font-size:11px;color:var(--txt3);margin-top:6px;text-align:center;}
+
+/* FORM */
+.form{display:flex;flex-direction:column;gap:24px;margin-top:40px;}
+
+.field{display:flex;flex-direction:column;gap:8px;}
+.field label{font-size:13px;font-weight:700;color:var(--txt);letter-spacing:-.1px;}
+.field .hint{font-size:12px;color:var(--txt3);margin-top:-4px;}
+
+/* Text inputs */
+textarea,select{
+  background:var(--panel);border:1px solid var(--border);border-radius:12px;
+  color:var(--txt);font-family:'Sora',sans-serif;font-size:14px;
+  padding:14px 16px;width:100%;outline:none;resize:vertical;
+  transition:border-color .2s;
+}
+textarea{min-height:100px;}
+textarea:focus,select:focus{border-color:var(--teal);}
+select option{background:var(--panel);}
+
+/* NPS */
+.nps{display:flex;gap:6px;flex-wrap:wrap;}
+.nps-btn{
+  width:44px;height:44px;border-radius:10px;border:1px solid var(--border);
+  background:var(--panel);color:var(--txt2);font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;
+}
+.nps-btn:hover{border-color:var(--teal);color:var(--teal);}
+.nps-btn.selected{background:var(--teal);border-color:var(--teal);color:#fff;}
+.nps-btn[data-v="0"],.nps-btn[data-v="1"],.nps-btn[data-v="2"],.nps-btn[data-v="3"],.nps-btn[data-v="4"],.nps-btn[data-v="5"],.nps-btn[data-v="6"]{--h:var(--border);}
+.nps-btn[data-v="7"],.nps-btn[data-v="8"]{--h:var(--xp);}
+.nps-btn[data-v="9"],.nps-btn[data-v="10"]{--h:var(--teal);}
+
+/* Chips */
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{
+  padding:8px 16px;border-radius:20px;border:1px solid var(--border);
+  background:var(--panel);color:var(--txt2);font-family:'Sora',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;
+}
+.chip:hover{border-color:var(--teal);color:var(--teal);}
+.chip.selected{background:var(--teal-dim);border-color:var(--teal);color:var(--teal2);}
+
+/* Pay section */
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.pay-opt{
+  padding:14px;border-radius:12px;border:1px solid var(--border);
+  background:var(--panel);cursor:pointer;transition:all .15s;text-align:center;
+}
+.pay-opt:hover{border-color:var(--teal);}
+.pay-opt.selected{background:var(--teal-dim);border-color:var(--teal);}
+.pay-opt .pay-price{font-size:18px;font-weight:800;color:var(--teal);font-family:'JetBrains Mono',monospace;margin-bottom:4px;}
+.pay-opt .pay-label{font-size:11px;color:var(--txt2);font-weight:600;}
+.pay-opt.selected .pay-label{color:var(--teal2);}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:4px 0;}
+
+/* Submit */
+.submit-wrap{text-align:center;padding-top:8px;}
+.submit-btn{
+  background:var(--teal);color:#fff;border:none;border-radius:14px;
+  font-family:'Sora',sans-serif;font-size:15px;font-weight:700;
+  padding:16px 48px;cursor:pointer;transition:all .2s;letter-spacing:-.2px;
+  width:100%;
+}
+.submit-btn:hover{background:var(--teal2);transform:translateY(-1px);}
+.submit-btn:active{transform:translateY(0);}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* Thank you state */
+.thankyou{display:none;text-align:center;padding:60px 20px;}
+.thankyou .ty-icon{font-size:56px;margin-bottom:20px;}
+.thankyou h2{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:12px;}
+.thankyou p{font-size:15px;color:var(--txt2);line-height:1.7;}
+
+/* Required star */
+.req{color:var(--teal);margin-left:3px;}
+
+footer{text-align:center;padding-top:40px;font-size:12px;color:var(--txt3);}
+footer a{color:var(--teal);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="logo">
+      <div class="logo-icon">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="logo-name">stack<span>d</span></div>
+    </div>
+    <div class="hero-tag">Beta Feedback</div>
+    <h1>Help us <span>build</span> great days.</h1>
+    <p>You tried Stackd with your kid. We want to know what worked, what didn't, and what you wish it did. Takes about 3 minutes.</p>
+  </div>
+
+  <form class="form" id="form">
+
+    <!-- NPS -->
+    <div class="field">
+      <label>How likely are you to recommend Stackd to another parent?<span class="req">*</span></label>
+      <div class="hint">0 = definitely not · 10 = absolutely yes</div>
+      <div class="nps" id="nps-wrap">
+        <button type="button" class="nps-btn" data-v="0" onclick="selectNPS(0)">0</button>
+        <button type="button" class="nps-btn" data-v="1" onclick="selectNPS(1)">1</button>
+        <button type="button" class="nps-btn" data-v="2" onclick="selectNPS(2)">2</button>
+        <button type="button" class="nps-btn" data-v="3" onclick="selectNPS(3)">3</button>
+        <button type="button" class="nps-btn" data-v="4" onclick="selectNPS(4)">4</button>
+        <button type="button" class="nps-btn" data-v="5" onclick="selectNPS(5)">5</button>
+        <button type="button" class="nps-btn" data-v="6" onclick="selectNPS(6)">6</button>
+        <button type="button" class="nps-btn" data-v="7" onclick="selectNPS(7)">7</button>
+        <button type="button" class="nps-btn" data-v="8" onclick="selectNPS(8)">8</button>
+        <button type="button" class="nps-btn" data-v="9" onclick="selectNPS(9)">9</button>
+        <button type="button" class="nps-btn" data-v="10" onclick="selectNPS(10)">10</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Theme -->
+    <div class="field">
+      <label>Which theme did you use?<span class="req">*</span></label>
+      <div class="chips" id="theme-chips">
+        <button type="button" class="chip" onclick="selectChip('theme',this)">Clean / Minimal</button>
+        <button type="button" class="chip" onclick="selectChip('theme',this)">Princess ✨</button>
+        <button type="button" class="chip" onclick="selectChip('theme',this)">OPS</button>
+        <button type="button" class="chip" onclick="selectChip('theme',this)">Superhero</button>
+        <button type="button" class="chip" onclick="selectChip('theme',this)">Little Kid</button>
+        <button type="button" class="chip" onclick="selectChip('theme',this)">Switched around</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Setup -->
+    <div class="field">
+      <label>What was confusing or hard to set up?</label>
+      <div class="hint">Be brutally honest — it helps more than being nice.</div>
+      <textarea id="setup" placeholder="e.g. I couldn't figure out how to add tasks, the PIN thing wasn't clear..."></textarea>
+    </div>
+
+    <!-- Missing -->
+    <div class="field">
+      <label>What feature do you wish Stackd had?</label>
+      <textarea id="missing" placeholder="e.g. I wanted to be able to set different schedules for weekends vs weekdays..."></textarea>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Pay -->
+    <div class="field">
+      <label>If Stackd had premium features, what would you pay?<span class="req">*</span></label>
+      <div class="hint">Premium = unlimited themes, stats, streaks, Google Sheets sync, multi-kid support</div>
+      <div class="pay-grid" id="pay-wrap">
+        <div class="pay-opt" onclick="selectPay(this,'nothing')">
+          <div class="pay-price">$0</div>
+          <div class="pay-label">Free only</div>
+        </div>
+        <div class="pay-opt" onclick="selectPay(this,'1-2')">
+          <div class="pay-price">$1–2/mo</div>
+          <div class="pay-label">Sure, maybe</div>
+        </div>
+        <div class="pay-opt" onclick="selectPay(this,'3-5')">
+          <div class="pay-price">$3–5/mo</div>
+          <div class="pay-label">Yes, worth it</div>
+        </div>
+        <div class="pay-opt" onclick="selectPay(this,'one-time')">
+          <div class="pay-price">$10–20</div>
+          <div class="pay-label">One-time, yes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Email (optional) -->
+    <div class="field">
+      <label>Email <span style="color:var(--txt3);font-weight:400;">(optional)</span></label>
+      <div class="hint">Only if you want updates when Stackd launches. Never shared, never spammed.</div>
+      <textarea id="email" style="min-height:0;height:50px;resize:none;" placeholder="your@email.com"></textarea>
+    </div>
+
+    <div class="submit-wrap">
+      <button type="button" class="submit-btn" id="submit-btn" onclick="submitForm()">Send feedback →</button>
+    </div>
+
+  </form>
+
+  <div class="thankyou" id="thankyou">
+    <div class="ty-icon">🙏</div>
+    <h2>Thank you.</h2>
+    <p>This feedback directly shapes what gets built next. Every response is read personally — not by an algorithm.<br><br>
+    If you left your email, you'll hear from us when Stackd launches.</p>
+  </div>
+
+  <footer>
+    <p>Stackd · Built for kids who think differently · <a href="#">stackd.app</a></p>
+  </footer>
+
+</div>
+
+<script>
+var npsVal = null;
+var themeVal = null;
+var payVal = null;
+
+function selectNPS(n){
+  npsVal = n;
+  document.querySelectorAll('.nps-btn').forEach(function(b){
+    b.classList.toggle('selected', parseInt(b.dataset.v) === n);
+  });
+}
+
+function selectChip(group, el){
+  themeVal = el.textContent.trim();
+  document.querySelectorAll('#theme-chips .chip').forEach(function(c){
+    c.classList.remove('selected');
+  });
+  el.classList.add('selected');
+}
+
+function selectPay(el, val){
+  payVal = val;
+  document.querySelectorAll('.pay-opt').forEach(function(o){
+    o.classList.remove('selected');
+  });
+  el.classList.add('selected');
+}
+
+function submitForm(){
+  // Validate required fields
+  if(npsVal === null){ alert('Please rate how likely you are to recommend Stackd.'); return; }
+  if(!themeVal){ alert('Please select a theme.'); return; }
+  if(!payVal){ alert('Please select a pricing option.'); return; }
+
+  var data = {
+    nps: npsVal,
+    theme: themeVal,
+    setup_issues: document.getElementById('setup').value.trim(),
+    missing_features: document.getElementById('missing').value.trim(),
+    pay_willingness: payVal,
+    email: document.getElementById('email').value.trim(),
+    submitted_at: new Date().toISOString(),
+    user_agent: navigator.userAgent
+  };
+
+  // Try to submit to a form endpoint
+  // Using a mailto fallback since no backend yet
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  // Build mailto with data
+  var body = Object.entries(data).map(function(kv){
+    return kv[0].replace(/_/g,' ').toUpperCase() + ': ' + kv[1];
+  }).join('\n');
+
+  var mailto = 'mailto:feedback@stackd.app?subject=Stackd Beta Feedback&body=' + encodeURIComponent(body);
+
+  // Also store locally
+  var existing = JSON.parse(localStorage.getItem('stackd_feedback') || '[]');
+  existing.push(data);
+  localStorage.setItem('stackd_feedback', JSON.stringify(existing));
+
+  // Show thank you
+  document.getElementById('form').style.display = 'none';
+  document.getElementById('thankyou').style.display = 'block';
+
+  // Open mailto as fallback
+  setTimeout(function(){
+    window.location.href = mailto;
+  }, 800);
+}
+</script>
+</body>
+</html>
