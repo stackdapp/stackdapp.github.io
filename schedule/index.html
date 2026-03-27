@@ -757,6 +757,19 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="ops"] .nb{font-size:10px;gap:2px;letter-spacing:.5px;}
 [data-stack-theme="ops"] .nb-icon{font-size:13px;}
 [data-stack-theme="ops"] .g-name{text-transform:uppercase;letter-spacing:1px;}
+[data-stack-theme="ops"] .topbar{background:#071409;border-bottom:1px solid #1a3010;}
+[data-stack-theme="ops"] .tb-s{background:#4ade80;color:#040c03;border-radius:6px;}
+[data-stack-theme="ops"] .tb-sub{text-transform:uppercase;letter-spacing:1px;color:#3a7030;font-size:8px;}
+[data-stack-theme="ops"] .tb-title{letter-spacing:3px;color:#4ade80;}
+[data-stack-theme="ops"] .live-chip{background:#4ade80;color:#040c03;border-radius:3px;border:none;font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+[data-stack-theme="ops"] .live-dot{background:#040c03;}
+[data-stack-theme="ops"] .block-card{border-left-width:4px;border-radius:8px;}
+[data-stack-theme="ops"] .xp-bar-fill{background:linear-gradient(90deg,#22c55e,#4ade80,#86efac);}
+[data-stack-theme="ops"] .bc-prog-fill{background:linear-gradient(90deg,#4ade80,#86efac);}
+[data-stack-theme="ops"] .level-fill{background:linear-gradient(90deg,#22c55e,#4ade80);box-shadow:none;}
+[data-stack-theme="ops"] .panel{border-radius:8px;border-left-width:4px;}
+[data-stack-theme="ops"] .navbar{background:#071409;}
+[data-stack-theme="ops"] .ph{font-size:8px;letter-spacing:1.5px;}
 
 /* ── THEME: SUPERHERO ── */
 [data-stack-theme="superhero"]{
@@ -812,24 +825,71 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="superhero"] .nb.school-active{color:#f11712;border-top-color:#f11712;}
 [data-stack-theme="superhero"] .btn{font-size:16px;font-family:"Righteous",cursive;letter-spacing:.2px;}
 [data-stack-theme="superhero"] .btn-school,[data-stack-theme="superhero"] .btn-primary,[data-stack-theme="superhero"] .btn{padding:13px 14px;}
+[data-stack-theme="superhero"] .topbar{background:#100810;border-bottom:none;}
+[data-stack-theme="superhero"] .tb-s{background:#0099f7;color:#fff;border-radius:8px;width:32px;height:32px;font-size:14px;}
+[data-stack-theme="superhero"] .tb-sub{color:#f11712;font-size:8px;letter-spacing:.5px;text-transform:uppercase;}
+[data-stack-theme="superhero"] .live-chip{background:#f11712;color:#fff;border-radius:4px;border:none;font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+[data-stack-theme="superhero"] .live-dot{background:#fff;}
+[data-stack-theme="superhero"] .xp-bar-fill{background:linear-gradient(90deg,#ffe63a,#ffed70);}
+[data-stack-theme="superhero"] .bc-prog-fill{background:linear-gradient(90deg,#0099f7,#34f9fe);}
+[data-stack-theme="superhero"] .level-fill{background:#0099f7;}
+[data-stack-theme="superhero"] .block-card{border-radius:10px;}
+[data-stack-theme="superhero"] .navbar{background:#100810;border-top:none;}
+
+/* ── THEME: SUPERHERO LIGHT ── */
+[data-stack-theme="superhero"][data-theme="light"]{
+  --bg:#fffde8;--bg2:#111111;--panel:#fff8f8;--panel2:#fff8cc;
+  --border:#111111;--border2:#333333;
+  --txt:#111111;--txt2:#444444;--txt3:#888888;--txt4:#cccccc;
+  --accent:#0055cc;--accent2:#0077ff;
+  --xp:#cc8800;--xp2:#e8a800;
+  --xp-dim:rgba(204,136,0,.12);--xp-glow:rgba(204,136,0,.3);
+  --accent-dim:rgba(0,85,204,.1);--accent-dim2:rgba(0,85,204,.06);
+  --grn:#0055cc;--grn-dim:rgba(0,85,204,.09);--grn-border:rgba(0,85,204,.25);
+  --red:#e8000f;--red-dim:rgba(232,0,15,.08);--red-border:rgba(232,0,15,.3);
+  --cat-school:#0055cc;--cat-chore:#0055cc;--cat-free:#0055cc;
+  --cat-wake:#e8000f;--cat-meal:#e8000f;--cat-bed:#e8000f;
+  --shadow:0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:2px 2px 0 #111,0 0 0 2px #111;
+}
+[data-stack-theme="superhero"][data-theme="light"] .topbar{background:#e8000f;border-bottom:3px solid #111;}
+[data-stack-theme="superhero"][data-theme="light"] .tb-title{color:#fffde8;}
+[data-stack-theme="superhero"][data-theme="light"] .navbar{background:#111;border-top:3px solid #111;}
+[data-stack-theme="superhero"][data-theme="light"] .nb{color:#555;}
+[data-stack-theme="superhero"][data-theme="light"] .nb.active{color:#ffe63a;border-top-color:#ffe63a;}
+[data-stack-theme="superhero"][data-theme="light"] .nb.school-active{color:#ffe63a;border-top-color:#ffe63a;}
+[data-stack-theme="superhero"][data-theme="light"] .panel{border:2px solid #111;box-shadow:2px 2px 0 #111;border-top:2px solid #111;}
+[data-stack-theme="superhero"][data-theme="light"] .btn-primary{background:#0055cc;color:#fff;box-shadow:3px 3px 0 #111;}
+[data-stack-theme="superhero"][data-theme="light"] .btn-school{background:#e8000f;color:#fff;box-shadow:3px 3px 0 #111;}
+[data-stack-theme="superhero"][data-theme="light"] .xp-bar-fill{background:#cc8800;}
+[data-stack-theme="superhero"][data-theme="light"] .level-fill{background:#0055cc;}
+[data-stack-theme="superhero"][data-theme="light"] .bc-prog-fill{background:#0055cc;}
+[data-stack-theme="superhero"][data-theme="light"] .sh-fill{background:#e8000f;}
+[data-stack-theme="superhero"][data-theme="light"] .task-item.done .ti-check{background:#0055cc;border-color:#0055cc;}
+[data-stack-theme="superhero"][data-theme="light"] .ti-check{border-color:#aaa;}
+[data-stack-theme="superhero"][data-theme="light"] .greeting-card{border:2px solid #111;box-shadow:3px 3px 0 #0055cc;}
+[data-stack-theme="superhero"][data-theme="light"] .block-card{border:3px solid #111;border-radius:10px;}
+[data-stack-theme="superhero"][data-theme="light"] .xp-bar-fill{background:linear-gradient(90deg,#cc8800,#ffe63a);}
+[data-stack-theme="superhero"][data-theme="light"] .bc-prog-fill{background:linear-gradient(90deg,#0055cc,#4499ff);}
+[data-stack-theme="superhero"][data-theme="light"] .panel{border:3px solid #111;box-shadow:3px 3px 0 #111;}
 
 /* ── THEME: LITTLE KID ── */
 [data-stack-theme="littlekid"]{
   --font-ui:'Chewy',cursive;
   --font-head:'Chewy',cursive;
-  --radius:16px;--radius-sm:12px;--radius-xs:8px;
-  --bg:#f4f9f4;--bg2:#edf5ed;--panel:#ffffff;--panel2:#f0f7f0;
-  --border:#b8ddb8;--border2:#cce8cc;
-  --txt:#0d2e0d;--txt2:#1a5c1a;--txt3:#4a8c4a;--txt4:#8aba8a;
-  --accent:#008844;--accent2:#00aa55;
-  --xp:#008844;--xp2:#00aa55;
-  --xp-dim:rgba(0,136,68,.1);--xp-glow:rgba(0,136,68,.25);
-  --accent-dim:rgba(0,136,68,.08);--accent-dim2:rgba(0,136,68,.04);
-  --grn:#008844;--grn-dim:rgba(0,136,68,.09);--grn-border:rgba(0,136,68,.3);
+  --radius:20px;--radius-sm:16px;--radius-xs:10px;
+  --bg:#f0fce8;--bg2:#d4f0b0;--panel:#ffffff;--panel2:#e8f8d0;
+  --border:#5aaa30;--border2:#a8d880;
+  --txt:#1a4a00;--txt2:#3a8010;--txt3:#78aa50;--txt4:#c0dca0;
+  --accent:#3a8010;--accent2:#5aaa30;
+  --xp:#a07800;--xp2:#c8a020;
+  --xp-dim:rgba(160,120,0,.12);--xp-glow:rgba(160,120,0,.3);
+  --accent-dim:rgba(58,128,16,.1);--accent-dim2:rgba(58,128,16,.06);
+  --grn:#3a8010;--grn-dim:rgba(58,128,16,.09);--grn-border:rgba(58,128,16,.3);
   --red:#cc4400;--red-dim:rgba(204,68,0,.08);--red-border:rgba(204,68,0,.25);
-  --cat-wake:#006633;--cat-school:#007744;--cat-meal:#338800;
-  --cat-chore:#005522;--cat-free:#009955;--cat-bed:#004422;--cat-bath:#00aa55;
-  --shadow:0 2px 8px rgba(0,136,68,.07);--shadow-md:0 4px 16px rgba(0,136,68,.1);
+  --cat-wake:#d08030;--cat-school:#3a8010;--cat-meal:#a07800;
+  --cat-chore:#5aaa30;--cat-free:#78aa50;--cat-bed:#6a5030;--cat-bath:#3a8010;
+  --shadow:0 2px 8px rgba(58,128,16,.07);--shadow-md:0 4px 16px rgba(58,128,16,.1);
 }
 [data-stack-theme="littlekid"] .tb-title,
 [data-stack-theme="littlekid"] .g-name,
@@ -841,7 +901,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="littlekid"] .streak-num,
 [data-stack-theme="littlekid"] .nb,
 [data-stack-theme="littlekid"] .btn{font-family:"Chewy",cursive;}
-[data-stack-theme="littlekid"] .tb-title{font-size:20px;color:#008844;}
+[data-stack-theme="littlekid"] .tb-title{font-size:20px;color:#ffffff;}
 [data-stack-theme="littlekid"] .g-name{font-size:26px;}
 [data-stack-theme="littlekid"] .panel{border-radius:18px;border-width:2px;}
 [data-stack-theme="littlekid"] .block-card,
@@ -849,16 +909,28 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="littlekid"] .reward-card{border-radius:14px;}
 [data-stack-theme="littlekid"] 
 [data-stack-theme="littlekid"] .nb{font-size:12px;gap:2px;letter-spacing:.3px;color:#8aba8a;}
-[data-stack-theme="littlekid"] .nb.active{color:#008844;border-top-color:#008844;}
-[data-stack-theme="littlekid"] .topbar{border-bottom:3px solid #008844;background:#edf5ed;}
+[data-stack-theme="littlekid"] .nb.active{color:#3a8010;border-top-color:#3a8010;}
+[data-stack-theme="littlekid"] .topbar{border-bottom:3px solid #5aaa30;background:#7cc840;}
 [data-stack-theme="littlekid"] 
-[data-stack-theme="littlekid"] .level-fill{background:#008844;box-shadow:0 0 8px rgba(0,136,68,.3);}
+[data-stack-theme="littlekid"] .level-fill{background:#3a8010;box-shadow:0 0 8px rgba(58,128,16,.3);}
 [data-stack-theme="littlekid"] .btn{font-size:17px;font-family:"Chewy",cursive;letter-spacing:.3px;}
-[data-stack-theme="littlekid"] .btn-primary{background:#008844;color:#fff;}
-[data-stack-theme="littlekid"] .btn-school{background:#006633;color:#fff;}
-[data-stack-theme="littlekid"] .btn-ghost{border-color:#b8ddb8;color:#1a5c1a;}
-[data-stack-theme="littlekid"] .xp-bar-fill{background:#008844;}
-[data-stack-theme="littlekid"] .task-item.done .ti-check{background:#008844;border-color:#008844;}
+[data-stack-theme="littlekid"] .btn-primary{background:#3a8010;color:#fff;}
+[data-stack-theme="littlekid"] .btn-school{background:#5aaa30;color:#fff;}
+[data-stack-theme="littlekid"] .btn-ghost{border-color:#a8d880;color:#3a8010;}
+[data-stack-theme="littlekid"] .xp-bar-fill{background:#a07800;}
+[data-stack-theme="littlekid"] .task-item.done .ti-check{background:#3a8010;border-color:#3a8010;}
+[data-stack-theme="littlekid"] .topbar{border-bottom:3px solid #3a8010;background:#5aaa30;}
+[data-stack-theme="littlekid"] .tb-s{background:#fff;color:#3a8010;border-radius:50%;border:2px solid #3a8010;font-size:16px;}
+[data-stack-theme="littlekid"] .tb-title{color:#fff;font-size:21px;}
+[data-stack-theme="littlekid"] .tb-sub{color:rgba(255,255,255,.85);}
+[data-stack-theme="littlekid"] .live-chip{background:#fff;color:#3a8010;border:none;border-radius:14px;font-weight:700;}
+[data-stack-theme="littlekid"] .live-dot{background:#3a8010;}
+[data-stack-theme="littlekid"] .xp-bar-fill{background:linear-gradient(90deg,#d4a000,#f0c000);}
+[data-stack-theme="littlekid"] .bc-prog-fill{background:linear-gradient(90deg,#3a8010,#7cc840);}
+[data-stack-theme="littlekid"] .level-fill{background:linear-gradient(90deg,#3a8010,#7cc840);box-shadow:none;}
+[data-stack-theme="littlekid"] .block-card{border-width:3px;border-radius:20px;}
+[data-stack-theme="littlekid"] .panel{border-width:2px;border-radius:20px;}
+[data-stack-theme="littlekid"] .navbar{background:#d4f0a8;border-top:2px solid #3a8010;}
 
 /* Little Kid category colors override */
 [data-stack-theme="littlekid"] .cat-wake,
@@ -882,7 +954,17 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 }
 [data-stack-theme="minimal"] .tb-title{font-family:Georgia,serif;font-weight:400;font-style:normal;letter-spacing:-.3px;}
 [data-stack-theme="minimal"] .g-name{font-family:Georgia,serif;font-weight:400;}
-[data-stack-theme="minimal"] .xp-val,[data-stack-theme="minimal"] .sxp-val,[data-stack-theme="minimal"] .rh-score,[data-stack-theme="minimal"] .streak-num{font-family:Georgia,serif;font-weight:400;}
+[data-stack-theme="minimal"] .xp-val,[data-stack-theme="minimal"] .sxp-val,[data-stack-theme="minimal"] .rh-score,[data-stack-theme="minimal"] .streak-num{font-family:Georgia,serif;font-weight:400;font-style:italic;}
+[data-stack-theme="minimal"] .tb-s{background:#0D9488;color:#fff;border-radius:10px;font-family:Georgia,serif;font-style:italic;font-size:16px;}
+[data-stack-theme="minimal"] .tb-sub{color:#0D9488;letter-spacing:.3px;}
+[data-stack-theme="minimal"] .tb-title{font-style:italic;}
+[data-stack-theme="minimal"] .live-chip{border-radius:20px;}
+[data-stack-theme="minimal"] .block-card{border-radius:14px;}
+[data-stack-theme="minimal"] .xp-bar-fill{background:linear-gradient(90deg,#d4860a,#f0a500,#ffc840);}
+[data-stack-theme="minimal"] .bc-prog-fill{background:linear-gradient(90deg,#0D9488,#14b8a6);}
+[data-stack-theme="minimal"] .level-fill{background:linear-gradient(90deg,#0D9488,#14b8a6);box-shadow:none;}
+[data-stack-theme="minimal"] .panel{border-radius:14px;}
+[data-stack-theme="minimal"] .g-name{font-style:italic;}
 
 /* minimal dark (default :root already is dark) */
 [data-stack-theme="minimal"]{
@@ -913,19 +995,19 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="littlekid"]{
   --font-ui:'Chewy',cursive;
   --font-head:'Chewy',cursive;
-  --radius:16px;--radius-sm:12px;--radius-xs:8px;
-  --bg:#f4f9f4;--bg2:#edf5ed;--panel:#ffffff;--panel2:#f0f7f0;
-  --border:#b8ddb8;--border2:#cce8cc;
-  --txt:#0d2e0d;--txt2:#1a5c1a;--txt3:#4a8c4a;--txt4:#8aba8a;
-  --accent:#008844;--accent2:#00aa55;
-  --xp:#008844;--xp2:#00aa55;
-  --xp-dim:rgba(0,136,68,.1);--xp-glow:rgba(0,136,68,.25);
-  --accent-dim:rgba(0,136,68,.08);--accent-dim2:rgba(0,136,68,.04);
-  --grn:#008844;--grn-dim:rgba(0,136,68,.09);--grn-border:rgba(0,136,68,.3);
+  --radius:20px;--radius-sm:16px;--radius-xs:10px;
+  --bg:#f0fce8;--bg2:#d4f0b0;--panel:#ffffff;--panel2:#e8f8d0;
+  --border:#5aaa30;--border2:#a8d880;
+  --txt:#1a4a00;--txt2:#3a8010;--txt3:#78aa50;--txt4:#c0dca0;
+  --accent:#3a8010;--accent2:#5aaa30;
+  --xp:#a07800;--xp2:#c8a020;
+  --xp-dim:rgba(160,120,0,.12);--xp-glow:rgba(160,120,0,.3);
+  --accent-dim:rgba(58,128,16,.1);--accent-dim2:rgba(58,128,16,.06);
+  --grn:#3a8010;--grn-dim:rgba(58,128,16,.09);--grn-border:rgba(58,128,16,.3);
   --red:#cc4400;--red-dim:rgba(204,68,0,.08);--red-border:rgba(204,68,0,.25);
-  --cat-wake:#006633;--cat-school:#007744;--cat-meal:#338800;
-  --cat-chore:#005522;--cat-free:#009955;--cat-bed:#004422;--cat-bath:#00aa55;
-  --shadow:0 2px 8px rgba(0,136,68,.07);--shadow-md:0 4px 16px rgba(0,136,68,.1);
+  --cat-wake:#d08030;--cat-school:#3a8010;--cat-meal:#a07800;
+  --cat-chore:#5aaa30;--cat-free:#78aa50;--cat-bed:#6a5030;--cat-bath:#3a8010;
+  --shadow:0 2px 8px rgba(58,128,16,.07);--shadow-md:0 4px 16px rgba(58,128,16,.1);
 }
 [data-stack-theme="littlekid"] .tb-title,
 [data-stack-theme="littlekid"] .g-name,
@@ -937,7 +1019,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="littlekid"] .streak-num,
 [data-stack-theme="littlekid"] .nb,
 [data-stack-theme="littlekid"] .btn{font-family:"Chewy",cursive;}
-[data-stack-theme="littlekid"] .tb-title{font-size:20px;color:#008844;}
+[data-stack-theme="littlekid"] .tb-title{font-size:20px;color:#ffffff;}
 [data-stack-theme="littlekid"] .g-name{font-size:26px;}
 [data-stack-theme="littlekid"] .panel{border-radius:18px;border-width:2px;}
 [data-stack-theme="littlekid"] .block-card,
@@ -945,16 +1027,16 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 [data-stack-theme="littlekid"] .reward-card{border-radius:14px;}
 [data-stack-theme="littlekid"] 
 [data-stack-theme="littlekid"] .nb{font-size:12px;gap:2px;letter-spacing:.3px;color:#8aba8a;}
-[data-stack-theme="littlekid"] .nb.active{color:#008844;border-top-color:#008844;}
-[data-stack-theme="littlekid"] .topbar{border-bottom:3px solid #008844;background:#edf5ed;}
+[data-stack-theme="littlekid"] .nb.active{color:#3a8010;border-top-color:#3a8010;}
+[data-stack-theme="littlekid"] .topbar{border-bottom:3px solid #5aaa30;background:#7cc840;}
 [data-stack-theme="littlekid"] 
-[data-stack-theme="littlekid"] .level-fill{background:#008844;box-shadow:0 0 8px rgba(0,136,68,.3);}
+[data-stack-theme="littlekid"] .level-fill{background:#3a8010;box-shadow:0 0 8px rgba(58,128,16,.3);}
 [data-stack-theme="littlekid"] .btn{font-size:17px;font-family:"Chewy",cursive;letter-spacing:.3px;}
-[data-stack-theme="littlekid"] .btn-primary{background:#008844;color:#fff;}
-[data-stack-theme="littlekid"] .btn-school{background:#006633;color:#fff;}
-[data-stack-theme="littlekid"] .btn-ghost{border-color:#b8ddb8;color:#1a5c1a;}
-[data-stack-theme="littlekid"] .xp-bar-fill{background:#008844;}
-[data-stack-theme="littlekid"] .task-item.done .ti-check{background:#008844;border-color:#008844;}
+[data-stack-theme="littlekid"] .btn-primary{background:#3a8010;color:#fff;}
+[data-stack-theme="littlekid"] .btn-school{background:#5aaa30;color:#fff;}
+[data-stack-theme="littlekid"] .btn-ghost{border-color:#a8d880;color:#3a8010;}
+[data-stack-theme="littlekid"] .xp-bar-fill{background:#a07800;}
+[data-stack-theme="littlekid"] .task-item.done .ti-check{background:#3a8010;border-color:#3a8010;}
 
 /* Little Kid category colors override */
 [data-stack-theme="littlekid"] .cat-wake,
@@ -1328,7 +1410,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
             <!-- LIVE PREVIEW CARD -->
             <div class="panel" id="warn-preview-card" style="margin-bottom:12px;text-align:center;position:relative;overflow:hidden;">
               <div style="font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;">Live Preview</div>
-              <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;" id="wp-subject-lbl">Free Time — 15:00–17:00</div>
+              <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;" id="wp-subject-lbl">Free Time - 15:00–17:00</div>
               <div id="wp-timer" style="font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:500;color:var(--accent);line-height:1;transition:background 1.5s ease,color .3s,padding .3s,border-radius .3s;">04:00</div>
               <div style="font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.4px;margin-top:5px;" id="wp-timer-lbl">time remaining</div>
               <div style="height:4px;background:var(--border2);border-radius:2px;margin:14px 0 0;">
@@ -1362,15 +1444,15 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <button class="warn-opt-btn warn-opt-active" id="wopt-soft" onclick="wpSetChime('soft')">
                   <div class="warn-opt-label">Whisper</div>
-                  <div class="warn-opt-desc">Single warm tone, barely there — won't startle</div>
+                  <div class="warn-opt-desc">Single warm tone, barely there - won't startle</div>
                 </button>
                 <button class="warn-opt-btn" id="wopt-bowl" onclick="wpSetChime('bowl')">
                   <div class="warn-opt-label">Chime</div>
-                  <div class="warn-opt-desc">Two clean bell tones — present and clear</div>
+                  <div class="warn-opt-desc">Two clean bell tones - present and clear</div>
                 </button>
                 <button class="warn-opt-btn" id="wopt-marimba" onclick="wpSetChime('marimba')">
                   <div class="warn-opt-label">Alert</div>
-                  <div class="warn-opt-desc">Three sharp beeps — hard to ignore</div>
+                  <div class="warn-opt-desc">Three sharp beeps - hard to ignore</div>
                 </button>
                 <button class="warn-opt-btn" id="wopt-none" onclick="wpSetChime('none')">
                   <div class="warn-opt-label">No chime</div>
@@ -1418,17 +1500,17 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
                   </div>
                 </button>
                 <button class="theme-opt-btn" id="stheme-littlekid" onclick="setStackTheme('littlekid')" style="padding:16px;">
-                  <div style="font-size:24px;color:#ff2200;font-family:'Chewy',cursive;margin-bottom:4px;">Adventure</div>
-                  <div style="font-size:11px;color:var(--txt3);">Fresh and outdoorsy. "Let's GO! 🚀"</div>
+                  <div style="font-size:24px;color:#3a8010;font-family:'Chewy',cursive;margin-bottom:4px;">Sprout</div>
+                  <div style="font-size:11px;color:var(--txt3);">Garden vibes. "Let's grow today!"</div>
                   <div style="display:flex;gap:6px;margin-top:10px;">
-                    <div style="width:18px;height:18px;border-radius:50%;background:#fafafa;border:1px solid #ddd;"></div>
-                    <div style="width:18px;height:18px;border-radius:50%;background:#ff2200;"></div>
-                    <div style="width:18px;height:18px;border-radius:50%;background:#00aa44;"></div>
-                    <div style="width:18px;height:18px;border-radius:50%;background:#0066ff;"></div>
+                    <div style="width:18px;height:18px;border-radius:50%;background:#f0fce8;border:1px solid #a8d880;"></div>
+                    <div style="width:18px;height:18px;border-radius:50%;background:#7cc840;"></div>
+                    <div style="width:18px;height:18px;border-radius:50%;background:#3a8010;"></div>
+                    <div style="width:18px;height:18px;border-radius:50%;background:#a07800;"></div>
                   </div>
                 </button>
                                 <button class="theme-opt-btn theme-opt-active" id="stheme-minimal" onclick="setStackTheme('minimal')" style="padding:20px;">
-                  <div style="font-size:28px;font-weight:400;color:var(--txt);font-family:Georgia,serif;letter-spacing:-.5px;margin-bottom:6px;">Calm</div>
+                  <div style="font-size:28px;font-weight:400;color:var(--txt);font-family:Georgia,serif;letter-spacing:-.5px;margin-bottom:6px;">Modern</div>
                   <div style="font-size:11px;color:var(--txt3);">Clean and simple. "Ready for today?"</div>
                   <div style="display:flex;gap:6px;margin-top:12px;">
                     <div style="width:20px;height:20px;border-radius:50%;background:#0a0f0d;border:1px solid var(--border);"></div>
@@ -1513,19 +1595,19 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
           </div>
         </button>
         <button class="theme-opt-btn" id="stheme-littlekid" onclick="pickTheme('littlekid')" style="padding:18px;text-align:left;">
-          <div style="font-size:26px;color:#008844;font-family:'Chewy',cursive;margin-bottom:4px;">Adventure</div>
-          <div style="font-size:12px;color:var(--txt3);">Fresh and outdoorsy. "Let's GO! 🚀"</div>
+          <div style="font-size:26px;color:#3a8010;font-family:'Chewy',cursive;margin-bottom:4px;">Sprout</div>
+          <div style="font-size:12px;color:var(--txt3);">Garden vibes. "Let's grow today!"</div>
           <div style="display:flex;gap:6px;margin-top:10px;">
-            <div style="width:20px;height:20px;border-radius:50%;background:#f4f9f4;border:1px solid #b8ddb8;"></div>
-            <div style="width:20px;height:20px;border-radius:50%;background:#008844;"></div>
-            <div style="width:20px;height:20px;border-radius:50%;background:#00aa55;"></div>
-            <div style="width:20px;height:20px;border-radius:50%;background:#338800;"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#f0fce8;border:1px solid #a8d880;"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#7cc840;"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#3a8010;"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#a07800;"></div>
           </div>
         </button>
                 <button class="theme-opt-btn" id="stheme-minimal" onclick="pickTheme('minimal')" style="padding:22px;text-align:left;">
-          <div style="font-size:32px;font-weight:400;color:var(--txt);font-family:Georgia,serif;letter-spacing:-.5px;margin-bottom:6px;">Stackd</div>
-          <div style="font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;">Clean and simple. "Ready for today?"</div>
-          <div style="font-size:12px;color:var(--txt3);line-height:1.5;">Warm and calm. Works in light and dark.</div>
+          <div style="font-size:32px;font-weight:400;color:var(--txt);font-family:Georgia,serif;letter-spacing:-.5px;margin-bottom:6px;">Modern</div>
+          <div style="font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;">Clean and refined. "Ready for today?"</div>
+          <div style="font-size:12px;color:var(--txt3);line-height:1.5;">Warm and modern. Works in light and dark.</div>
           <div style="display:flex;gap:6px;margin-top:14px;">
             <div style="width:22px;height:22px;border-radius:50%;background:#1c1917;"></div>
             <div style="width:22px;height:22px;border-radius:50%;background:#f7f5f0;border:1px solid rgba(0,0,0,.1);"></div>
@@ -1568,7 +1650,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         <div class="wt-slide active" id="wt-slide-0">
           <div style="font-size:52px;text-align:center;margin-bottom:20px;">👋</div>
           <div class="wt-title">Welcome to Stackd</div>
-          <div class="wt-body">Stackd helps kids manage their day with schedules, tasks, timers, and rewards — all in one place.</div>
+          <div class="wt-body">Stackd helps kids manage their day with schedules, tasks, timers, and rewards - all in one place.</div>
           <div class="wt-body" style="margin-top:10px;">This guide takes about 2 minutes. You can skip it anytime.</div>
         </div>
 
@@ -1576,7 +1658,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         <div class="wt-slide" id="wt-slide-1">
           <div style="font-size:52px;text-align:center;margin-bottom:20px;">🔒</div>
           <div class="wt-title">Set up as a parent first</div>
-          <div class="wt-body">Tap the <strong>Parent</strong> button in the top right. Your default PIN is <strong>1234</strong> — change it in Parent → Settings.</div>
+          <div class="wt-body">Tap the <strong>Parent</strong> button in the top right. Your default PIN is <strong>1234</strong> - change it in Parent → Settings.</div>
           <div class="wt-tip">From the Parent dashboard you can set your kid's name, customize the schedule, add chores, and create rewards.</div>
         </div>
 
@@ -1592,7 +1674,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         <div class="wt-slide" id="wt-slide-3">
           <div style="font-size:52px;text-align:center;margin-bottom:20px;">⭐</div>
           <div class="wt-title">XP and rewards</div>
-          <div class="wt-body">Kids earn XP by completing tasks and blocks. They spend it in the <strong>Rewards</strong> tab on things you set up — like screen time, a snack, or staying up late.</div>
+          <div class="wt-body">Kids earn XP by completing tasks and blocks. They spend it in the <strong>Rewards</strong> tab on things you set up - like screen time, a snack, or staying up late.</div>
           <div class="wt-tip">Set reward costs high enough that they feel earned. Start with 3–4 rewards to keep it simple.</div>
         </div>
 
@@ -2264,10 +2346,10 @@ function renderDebrief(){
   var kidName=DB.config.kidName||'there';
   let score,grade,color,msg;
   if(pct===100){score='100%';grade='Perfect Day';color='var(--grn)';msg='Every single task done, '+kidName+'! That\'s a perfect day. You earned it.';}
-  else if(pct>=80){score=pct+'%';grade='Strong Day';color='var(--xp)';msg='Really solid effort. A few things left — finish strong tomorrow.';}
+  else if(pct>=80){score=pct+'%';grade='Strong Day';color='var(--xp)';msg='Really solid effort. A few things left - finish strong tomorrow.';}
   else if(pct>=50){score=pct+'%';grade='Getting There';color='var(--txt)';msg='You\'ve got more in you. Tomorrow is another shot at it.';}
-  else if(pct>0){score=pct+'%';grade='Rough Day';color='var(--red)';msg='Not your best day — that\'s okay. Tomorrow is a fresh start.';}
-  else{score='0%';grade='No XP Yet';color='var(--red)';msg='Nothing checked off yet. There\'s still time — go get it.';}
+  else if(pct>0){score=pct+'%';grade='Rough Day';color='var(--red)';msg='Not your best day - that\'s okay. Tomorrow is a fresh start.';}
+  else{score='0%';grade='No XP Yet';color='var(--red)';msg='Nothing checked off yet. There\'s still time - go get it.';}
   el('d-score').textContent=score;el('d-score').style.color=color;
   el('d-grade').textContent=grade;el('d-msg').textContent=msg;
   el('d-streak-desc').textContent=
@@ -2964,7 +3046,7 @@ function wpPreview(mode){
     if(wpVisual==='gradient'||wpVisual==='both'){
       if(timerEl){timerEl.style.color='';timerEl.style.background='';timerEl.style.borderRadius='';timerEl.style.padding='';timerEl.classList.add('timer-pill-sweep');}
     }
-    if(el('wp-timer-lbl')) el('wp-timer-lbl').textContent='warning — 4 min left';
+    if(el('wp-timer-lbl')) el('wp-timer-lbl').textContent='warning - 4 min left';
     el('wp-timer').textContent='04:00';
   } else {
     // End preview
@@ -3011,7 +3093,7 @@ function renderWarningsEditor(){
     var b=cur?cur.block:nxt;
     if(b){
       var ts=b.start?(b.end?b.start+'–'+b.end:b.start):'';
-      lbl.textContent=(b.block+(ts?' — '+ts:'')).toUpperCase();
+      lbl.textContent=(b.block+(ts?' - '+ts:'')).toUpperCase();
     } else {
       lbl.textContent='No blocks scheduled today';
     }
