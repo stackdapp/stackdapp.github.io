@@ -199,9 +199,6 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 }
 
 
-  .content{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;touch-action:pan-y;}
-  #safe-top{height:env(safe-area-inset-top);min-height:env(safe-area-inset-top);}
-}
 .navbar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
 /* -- TOPBAR -- */
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
@@ -1179,9 +1176,9 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
             <div class="stat-box">
               <div class="stat-box-lbl">Today's XP</div>
               <div class="stat-box-val" style="color:var(--xp)" id="home-school-xp">0</div>
-              <div class="stat-box-sub">School XP today</div>
+              <div class="stat-box-sub">XP today</div>
               <div class="stat-box-cells">
-                <div class="stat-cell"><div class="sc-lbl">Done</div><div class="sc-val" id="home-done">0</div></div>
+                <div class="stat-cell"><div class="sc-lbl">Earned</div><div class="sc-val" id="home-done">0</div></div>
                 <div class="stat-cell"><div class="sc-lbl">Left</div><div class="sc-val" id="home-left">0</div></div>
                 <div class="stat-cell"><div class="sc-lbl">Total</div><div class="sc-val" id="home-total">0</div></div>
               </div>
@@ -1189,39 +1186,34 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
           </div>
 
           <div class="block-card" id="home-school-card">
-            <div class="bc-eyebrow">Today's session</div>
+            <div class="bc-eyebrow">Current block</div>
             <div class="bc-name" id="b-block-name">Loading...</div>
             <div class="bc-timer" id="b-timer" style="font-size:32px;">--</div>
-            <div class="bc-lbl">subjects remaining</div>
+            <div class="bc-lbl">time remaining</div>
             <div class="bc-prog-track"><div class="bc-prog-fill" id="b-prog" style="width:0%"></div></div>
-            <div class="bc-next" id="b-next">XP available: <span>--</span></div>
+            <div class="bc-next" id="b-next">Up next: <span>--</span></div>
           </div>
 
+          <div class="panel">
+            <div class="ph">Today's schedule <div class="ph-line"></div><span class="ph-count" id="m-count"></span></div>
+            <div id="m-schedule"><div class="loading-msg">Loading...</div></div>
+          </div>
 
-
-          <button class="btn btn-school" onclick="nav('school')" style="margin-top:0;">📚 Start Today's Session</button>
-
-        </div>
-      </div><!-- SCHEDULE -->
-      <div class="screen" id="s-mission">
-        <div class="panel">
-          <div class="ph">Today's schedule <div class="ph-line"></div><span class="ph-count" id="m-count"></span></div>
-          <div id="m-schedule"><div class="loading-msg">Loading...</div></div>
         </div>
       </div>
 
       <!-- TASKS -->
       <div class="screen" id="s-activities">
         <div class="panel">
-          <div class="ph">Daily tasks <div class="ph-line"></div></div>
+          <div class="ph">Chores <div class="ph-line"></div><span class="ph-count" id="a-count"></span></div>
           <div class="xp-bar-wrap" style="margin-bottom:12px;">
             <div class="xp-bar-track"><div class="xp-bar-fill" id="a-xp-fill" style="width:0%"></div></div>
             <div class="xp-bar-label"><span id="a-xp-val">0</span> / <span id="a-xp-max">0</span> XP earned</div>
           </div>
-          <div id="a-task-list"><div class="loading-msg">Loading tasks...</div></div>
+          <div id="a-chore-list"><div class="loading-msg">Loading chores...</div></div>
         </div>
         <div class="panel" style="margin-top:12px;">
-          <div class="ph">Schedule blocks <div class="ph-line"></div></div>
+          <div class="ph">Schedule blocks <div class="ph-line"></div><span class="ph-count" id="a-sched-count"></span></div>
           <div id="a-sched-list"><div class="loading-msg">Loading...</div></div>
           <div class="bot-bar"><div id="bot-msg" class="bot-msg"></div></div>
         </div>
@@ -1293,20 +1285,24 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         </div>
         <div class="parent-tabs">
             <button class="ptab active" id="ptab-schedule" onclick="ptab('schedule')">Schedule</button>
+            <button class="ptab" id="ptab-tasks" onclick="ptab('tasks')">Chores</button>
             <button class="ptab" id="ptab-rewards" onclick="ptab('rewards')">Rewards</button>
             <button class="ptab" id="ptab-warnings" onclick="ptab('warnings')">Warnings</button>
             <button class="ptab" id="ptab-settings" onclick="ptab('settings')">Settings</button>
           </div>
           <div class="ptab-content active" id="pc-schedule">
             <div class="parent-toolbar">
-              <span class="parent-hint">Set school days and subjects.</span>
-              <button class="btn-add" onclick="addSubject()">+ Add Subject</button>
+              <span class="parent-hint">Add and edit daily schedule blocks.</span>
+              <button class="btn-add" onclick="addBlock()">+ Add Block</button>
             </div>
-            <div class="panel" style="margin-bottom:12px;">
-              <div class="ph">School Days <div class="ph-line"></div></div>
-              <div class="day-toggles" id="school-day-toggles"></div>
+            <div id="block-editor-list"></div>
+          </div>
+          <div class="ptab-content" id="pc-tasks">
+            <div class="parent-toolbar">
+              <span class="parent-hint">Chores kids complete for XP.</span>
+              <button class="btn-add" onclick="addTask()">+ Add Chore</button>
             </div>
-            <div id="subject-editor-list"></div>
+            <div id="task-editor-list"></div>
           </div>
           <div class="ptab-content" id="pc-rewards">
             <div class="parent-toolbar">
@@ -1613,15 +1609,11 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 
   <div class="navbar">
     <button class="nb active" id="nb-brief"      onclick="nav('brief')">      <span class="nb-icon">🏠</span>Home</button>
-    <button class="nb"        id="nb-mission"    onclick="nav('mission')">    <span class="nb-icon">🗓</span>Day</button>
-    <button class="nb"        id="nb-activities" onclick="nav('activities')"> <span class="nb-icon">✅</span>Tasks</button>
+    <button class="nb"        id="nb-activities" onclick="nav('activities')"> <span class="nb-icon">🗓</span>Mission</button>
     <button class="nb"        id="nb-rewards"    onclick="nav('rewards')">    <span class="nb-icon">⭐</span>Rewards</button>
     <button class="nb"        id="nb-debrief"    onclick="nav('debrief')">    <span class="nb-icon">📊</span>Report</button>
   </div>
-  <div class="botbar">
-    <div id="bot-msg">Ready.</div>
-    <div id="uptime-el">00:00:00</div>
-  </div>
+
 </div>
 
 <script>
@@ -1841,7 +1833,7 @@ function navParent(){
 }
 
 function showParentScreen(){
-  var screens=['brief','mission','school','activities','rewards','debrief','parent'];
+  var screens=['brief','school','activities','rewards','debrief','parent'];
   screens.forEach(function(s){
     var sc=el('s-'+s);if(sc&&sc.classList)sc.classList.remove('active');
     var nb=el('nb-'+s);if(nb&&nb.classList){nb.classList.remove('active');nb.classList.remove('school-active');}
@@ -1854,7 +1846,7 @@ function showParentScreen(){
 function nav(screen){
   if(screen==='parent'&&!parentUnlocked){
     // Show locked state, then require PIN
-    const screens=['brief','mission','school','activities','rewards','debrief','parent'];
+    const screens=['brief','school','activities','rewards','debrief','parent'];
     screens.forEach(s=>{const sc=el('s-'+s);if(sc)sc.classList.remove('active');const nb=el('nb-'+s);if(nb){nb.classList.remove('active');nb.classList.remove('school-active');}});
     el('s-parent').classList.add('active');
     el('nb-parent').classList.add('active');
@@ -1862,14 +1854,14 @@ function nav(screen){
     el('app-title').textContent='Parent';
     return;
   }
-  const screens=['brief','mission','school','activities','rewards','debrief','parent'];
+  const screens=['brief','school','activities','rewards','debrief','parent'];
   screens.forEach(s=>{const sc=el('s-'+s);if(sc)sc.classList.remove('active');const nb=el('nb-'+s);if(nb){nb.classList.remove('active');nb.classList.remove('school-active');}});
   const sc=el('s-'+screen);if(sc)sc.classList.add('active');
   const nb=el('nb-'+screen);
   if(nb){if(screen==='school')nb.classList.add('school-active');else nb.classList.add('active');}
-  const titles={brief:'stackd · school',school:'School',rewards:'Rewards',debrief:'Daily Report',parent:'Parent'};
+  const titles={brief:'stackd',activities:'Mission',rewards:'Rewards',debrief:'Daily Report',parent:'Parent'};
   el('app-title').textContent=titles[screen]||'stackd';
-  const renders={brief:renderBrief,school:renderSchool,rewards:renderRewards,debrief:renderDebrief,parent:renderParent};
+  const renders={brief:function(){renderBrief();renderMission();},activities:renderActivities,rewards:renderRewards,debrief:renderDebrief,parent:renderParent};
   if(renders[screen])renders[screen]();
 }
 
@@ -1898,18 +1890,30 @@ function renderBrief(){
   el('b-rank-fill').style.width=pct+'%';
   el('b-lxp').textContent=total.toLocaleString();
   el('b-nxp').textContent=next?next.min.toLocaleString():'MAX';
-  // School session summary
-  const lessons=getTodaySubjects();
-  const done=lessons.filter((_,i)=>DB.isSubjectDone(i)).length;
-  const left=lessons.length-done;
-  const totalXP=lessons.reduce((s,l)=>s+l.xp,0);
-  const earnedXP=DB.getSchoolXPToday();
-  const pctDone=lessons.length>0?Math.round((done/lessons.length)*100):0;
-  el('b-block-name').textContent=lessons.length===0?'No school today':done===lessons.length&&lessons.length>0?'Session complete! 🎉':'Session in progress';
-  el('b-timer').textContent=done+'/'+lessons.length;
-  el('b-prog').style.width=pctDone+'%';
-  el('b-next').innerHTML='XP available: <span>'+totalXP+'</span>';
-  el('b-temp').textContent=earnedXP;
+  // XP stat box
+  const spendable=DB.getSpendable();
+  el('home-school-xp').textContent=spendable.toLocaleString();
+  const todayBlocks=DB.schedule.filter(b=>isActiveDay(b.days)&&b.block);
+  const todayTasks=DB.tasks.filter(t=>isActiveDay(t.days));
+  const earnedXP=
+    todayBlocks.filter(b=>DB.isBlockDone(b.id)).reduce((s,b)=>s+(b.xp||0),0)+
+    todayTasks.filter(t=>DB.isTaskDone(t.id)).reduce((s,t)=>s+(t.xp||0),0);
+  const totalXP=
+    todayBlocks.reduce((s,b)=>s+(b.xp||0),0)+
+    todayTasks.reduce((s,t)=>s+(t.xp||0),0);
+  el('home-done').textContent=earnedXP;
+  el('home-left').textContent=totalXP-earnedXP;
+  el('home-total').textContent=totalXP;
+  // Current schedule block
+  var curBlock=getCurrentBlock();
+  var nextBlock=getNextBlock();
+  if(curBlock){
+    el('b-block-name').textContent=curBlock.block.block;
+    el('b-next').innerHTML='Up next: <span>'+(nextBlock?nextBlock.block:'Done for the day')+'</span>';
+  } else {
+    el('b-block-name').textContent=nextBlock?'Up next: '+nextBlock.block:'No more blocks today';
+    el('b-next').innerHTML='';
+  }
 }
 
 function getCurrentBlock(){
@@ -2140,7 +2144,7 @@ function renderActivities(){
   DB.tasks.filter(t=>isActiveDay(t.days)).forEach(t=>{totalXP+=t.xp;if(DB.isTaskDone(t.id))earnedXP+=t.xp;});
   const pct=totalXP>0?Math.round((earnedXP/totalXP)*100):0;
   el('a-xp-val').textContent=earnedXP;
-  el('a-xp-max').textContent='/ '+totalXP+' XP available';
+  el('a-xp-max').textContent=totalXP+' XP available';
   el('a-xp-fill').style.width=pct+'%';
 
   // Schedule blocks
@@ -2150,14 +2154,14 @@ function renderActivities(){
     const hdr=document.createElement('div');hdr.className='task-item'+(done?' done':'');hdr.style.borderLeftColor=color;
     const ts=b.start?(b.end?b.start+'–'+b.end:b.start):'';
     hdr.innerHTML='<div class="ti-check"></div><span class="ti-lbl" style="font-weight:700;">'+b.block+(ts?' <span style="font-size:10px;color:var(--txt3);font-weight:400;">'+ts+'</span>':'')+'</span><span class="ti-xp">'+(done?'✓ ':'+')+(b.xp||0)+'</span>';
-    if(!done)hdr.onclick=()=>{DB.setBlockDone(b.id);if(b.xp>0){DB.addChoreXP(b.xp);DB.addSpendable(b.xp);showXPFlash('+'+b.xp+' XP');playXP();}renderActivities();};
+    if(!done)hdr.onclick=()=>{DB.setBlockDone(b.id);if(b.xp>0){DB.addChoreXP(b.xp);DB.addSpendable(b.xp);showXPFlash('+'+b.xp+' XP');playXP();}renderActivities();renderBrief();};
     sl.appendChild(hdr);sc++;
     (b.items||[]).forEach(it=>{
       const idone=DB.isSubitemDone(it.id);
       const row=document.createElement('div');row.className='task-item'+(idone?' done':'');
       row.style.cssText='border-left-color:'+color+';margin-left:14px;';
       row.innerHTML='<div class="ti-check"></div><span class="ti-lbl">'+it.name+'</span><span class="ti-xp">'+(idone?'✓ ':'+')+(it.xp||0)+'</span>';
-      if(!idone)row.onclick=()=>{DB.setSubitemDone(it.id);if(it.xp>0){DB.addChoreXP(it.xp);DB.addSpendable(it.xp);showXPFlash('+'+it.xp+' XP');playXP();}renderActivities();};
+      if(!idone)row.onclick=()=>{DB.setSubitemDone(it.id);if(it.xp>0){DB.addChoreXP(it.xp);DB.addSpendable(it.xp);showXPFlash('+'+it.xp+' XP');playXP();}renderActivities();renderBrief();};
       sl.appendChild(row);sc++;
     });
   });
@@ -2173,7 +2177,7 @@ function renderActivities(){
     const done=DB.isTaskDone(t.id);const color=CAT_COLOR[t.category]||CAT_COLOR.chore;
     const div=document.createElement('div');div.className='task-item'+(done?' done':'');div.style.borderLeftColor=color;
     div.innerHTML='<div class="ti-check"></div><span class="ti-lbl">'+t.name+'</span><span class="ti-xp">'+(done?'✓ ':'+')+t.xp+'</span>';
-    if(!done)div.onclick=()=>{DB.setTaskDone(t.id);if(t.xp>0){DB.addChoreXP(t.xp);DB.addSpendable(t.xp);showXPFlash('+'+t.xp+' XP');playXP();}renderActivities();if(todayTasks.every(tt=>DB.isTaskDone(tt.id)))setTimeout(()=>showToast('All tasks done! 🔥'),400);};
+    if(!done)div.onclick=()=>{DB.setTaskDone(t.id);if(t.xp>0){DB.addChoreXP(t.xp);DB.addSpendable(t.xp);showXPFlash('+'+t.xp+' XP');playXP();}renderActivities();renderBrief();if(todayTasks.every(tt=>DB.isTaskDone(tt.id)))setTimeout(()=>showToast('All tasks done! 🔥'),400);};
     cl.appendChild(div);
   });}
   el('bot-msg').textContent=pct===100?'All tasks done! 🎉':'Keep going - earn that XP.';
@@ -2264,7 +2268,7 @@ function renderDebrief(){
 function renderParent(){
   startEditing();
   el('set-kidname').value=(STAGING?STAGING.config.kidName:DB.config.kidName)||'';
-  ptab('school');
+  ptab('schedule');
 }
 
 function ptab(name){
@@ -2606,11 +2610,36 @@ function launchApp(){
   if(!DB.config.themeChosen){setTimeout(showThemePicker,800);}
   el('app').classList.add('ready');
   applyTheme(getTheme());
-  setClock();renderBrief();
+  setClock();renderBrief();renderMission();
   setInterval(setClock,1000);setInterval(updateUptime,1000);
+  var _lastBlockId=null;
+  // Per-second block timer tick with warnings
+  setInterval(function(){
+    var cur=getCurrentBlock();
+    if(!cur){
+      blockWarnTriggered=false;
+      resetTimerWarning(el('home-school-card'),el('b-timer'),el('b-prog'));
+      el('b-timer').textContent='--:--';
+      return;
+    }
+    // Reset warn flag when block changes
+    if(cur.block.id!==_lastBlockId){blockWarnTriggered=false;_lastBlockId=cur.block.id;}
+    var nowMins=new Date().getHours()*60+new Date().getMinutes();
+    var nowSecs=nowMins*60+new Date().getSeconds();
+    var endSecs=cur.endMins*60;
+    var startSecs=cur.startMins*60;
+    var totalSecs=endSecs-startSecs;
+    var secsRemaining=Math.max(0,endSecs-nowSecs);
+    el('b-timer').textContent=fmtSecs(secsRemaining);
+    el('b-prog').style.width=Math.min(100,Math.round(((nowSecs-startSecs)/totalSecs)*100))+'%';
+    // Swap global warnTriggered for block-specific one
+    var _saved=warnTriggered;warnTriggered=blockWarnTriggered;
+    applyTimerWarning(secsRemaining,totalSecs,el('b-timer'),el('b-prog'),el('home-school-card'));
+    blockWarnTriggered=warnTriggered;warnTriggered=_saved;
+  },1000);
   setInterval(()=>{
-    if(el('s-brief').classList.contains('active'))renderBrief();
-    if(el('s-mission').classList.contains('active'))renderMission();
+    if(el('s-brief')&&el('s-brief').classList.contains('active')){renderBrief();renderMission();}
+    if(el('s-activities')&&el('s-activities').classList.contains('active'))renderActivities();
   },30000);
   setTimeout(()=>{el('splash').style.display='none';el('splash').style.pointerEvents='none';},400);
 }
@@ -2644,6 +2673,7 @@ function updateKidName(){
 
 // ── TIMER WARNING SYSTEM ──
 var warnTriggered = false;
+var blockWarnTriggered = false;
 
 function getWarnMins(){ return (DB.config.warnMins)||5; }
 function getWarnVisual(){ return DB.config.warnVisual||'both'; }
@@ -2754,7 +2784,7 @@ function applyTimerWarning(secsRemaining, totalSecs, timerEl, fillEl, cardEl){
         timerEl.style.padding='4px 16px';
         timerEl.style.transition='background 1.5s ease';
       }
-      if(fillEl&&fillEl.style) fillEl.style.background=fillColor;
+      if(fillEl&&fillEl.style) fillEl.style.background=bgColor;
     }
 
     // Pulse
@@ -2771,8 +2801,8 @@ function applyTimerWarning(secsRemaining, totalSecs, timerEl, fillEl, cardEl){
       playWarnChime();
     }
   } else {
-    // Outside warning window — reset everything
-    if(timerEl&&timerEl.style) timerEl.style.color='';
+    // Outside warning window — reset everything including inline styles
+    if(timerEl&&timerEl.style){timerEl.style.color='';timerEl.style.background='';timerEl.style.borderRadius='';timerEl.style.padding='';}
     if(fillEl&&fillEl.style) fillEl.style.background='';
     if(cardEl&&cardEl.classList){
       cardEl.classList.remove('timer-pulse-warn');
@@ -3222,7 +3252,7 @@ boot();
 <script>
 // ── AUTO-UPDATE CHECK ──
 // Checks if a new version is available when app comes into focus
-var APP_VERSION = 'stackd-v1774642423';
+var APP_VERSION = 'stackd-v1774642825';
 var _updateChecked = false;
 
 function checkForUpdate(){
