@@ -3168,9 +3168,14 @@ function updateNavLabels(){
     'nb-debrief':w.navReport
   };
   Object.keys(map).forEach(function(id){
-    var btn=el(id);
-    if(btn&&btn.lastChild&&btn.lastChild.nodeType===3){
-      btn.lastChild.nodeValue=map[id];
+    var btn=el(id);if(!btn)return;
+    // Find the last non-empty text node (after the icon span)
+    var nodes=btn.childNodes;
+    for(var i=nodes.length-1;i>=0;i--){
+      if(nodes[i].nodeType===3&&nodes[i].nodeValue.trim()!==''){
+        nodes[i].nodeValue=map[id];
+        break;
+      }
     }
   });
   // Update XP label
