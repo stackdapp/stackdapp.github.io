@@ -1251,8 +1251,8 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
           <div class="rh-msg" id="d-msg">Check back at the end of the day.</div>
         </div>
         <div class="stat-grid">
-          <div class="stat-cell-box"><div class="stat-cell-lbl">Session XP</div><div class="stat-cell-val" id="d-chore-xp">0</div></div>
-          <div class="stat-cell-box"><div class="stat-cell-lbl">School XP</div><div class="stat-cell-val" id="d-school-xp" style="color:var(--cat-school)">0</div></div>
+          <div class="stat-cell-box"><div class="stat-cell-lbl">Chore XP</div><div class="stat-cell-val" id="d-chore-xp">0</div></div>
+          <div class="stat-cell-box"><div class="stat-cell-lbl">Block XP</div><div class="stat-cell-val" id="d-school-xp" style="color:var(--cat-school)">0</div></div>
           <div class="stat-cell-box"><div class="stat-cell-lbl">Level</div><div class="stat-cell-val" id="d-rank-abbr">—</div></div>
         </div>
         <div class="streak-card">
@@ -1569,7 +1569,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
           <div style="font-size:52px;text-align:center;margin-bottom:20px;">🔒</div>
           <div class="wt-title">Set up as a parent first</div>
           <div class="wt-body">Tap the <strong>Parent</strong> button in the top right. Your default PIN is <strong>1234</strong> — change it in Parent → Settings.</div>
-          <div class="wt-tip">From the Parent dashboard you can set your kid's name, customize the schedule, add tasks, set up school subjects, and create rewards.</div>
+          <div class="wt-tip">From the Parent dashboard you can set your kid's name, customize the schedule, add chores, and create rewards.</div>
         </div>
 
         <!-- Slide 2: Schedule -->
@@ -1833,7 +1833,7 @@ function navParent(){
 }
 
 function showParentScreen(){
-  var screens=['brief','school','activities','rewards','debrief','parent'];
+  var screens=['brief','activities','rewards','debrief','parent'];
   screens.forEach(function(s){
     var sc=el('s-'+s);if(sc&&sc.classList)sc.classList.remove('active');
     var nb=el('nb-'+s);if(nb&&nb.classList){nb.classList.remove('active');nb.classList.remove('school-active');}
@@ -1846,7 +1846,7 @@ function showParentScreen(){
 function nav(screen){
   if(screen==='parent'&&!parentUnlocked){
     // Show locked state, then require PIN
-    const screens=['brief','school','activities','rewards','debrief','parent'];
+    const screens=['brief','activities','rewards','debrief','parent'];
     screens.forEach(s=>{const sc=el('s-'+s);if(sc)sc.classList.remove('active');const nb=el('nb-'+s);if(nb){nb.classList.remove('active');nb.classList.remove('school-active');}});
     el('s-parent').classList.add('active');
     el('nb-parent').classList.add('active');
@@ -1854,11 +1854,11 @@ function nav(screen){
     el('app-title').textContent='Parent';
     return;
   }
-  const screens=['brief','school','activities','rewards','debrief','parent'];
+  const screens=['brief','activities','rewards','debrief','parent'];
   screens.forEach(s=>{const sc=el('s-'+s);if(sc)sc.classList.remove('active');const nb=el('nb-'+s);if(nb){nb.classList.remove('active');nb.classList.remove('school-active');}});
   const sc=el('s-'+screen);if(sc)sc.classList.add('active');
   const nb=el('nb-'+screen);
-  if(nb){if(screen==='school')nb.classList.add('school-active');else nb.classList.add('active');}
+  if(nb){nb.classList.add('active');}
   const titles={brief:'stackd',activities:'Mission',rewards:'Rewards',debrief:'Daily Report',parent:'Parent'};
   el('app-title').textContent=titles[screen]||'stackd';
   const renders={brief:function(){renderBrief();renderMission();},activities:renderActivities,rewards:renderRewards,debrief:renderDebrief,parent:renderParent};
@@ -2232,14 +2232,18 @@ function unlockReward(id,cost,name){
 
 // -- REPORT --
 function renderDebrief(){
-  const choreXP=DB.getChoreXP();const schoolXP=DB.getSchoolXPToday();
-  const lessons=getTodaySubjects();
-  const doneItems=lessons.filter((_,i)=>DB.isSubjectDone(i)).length;
-  const totalItems=lessons.length;
+  const todayBlocks=DB.schedule.filter(b=>isActiveDay(b.days)&&b.block);
+  const todayTasks=DB.tasks.filter(t=>isActiveDay(t.days));
+  const doneBlocks=todayBlocks.filter(b=>DB.isBlockDone(b.id)).length;
+  const doneTasks=todayTasks.filter(t=>DB.isTaskDone(t.id)).length;
+  const totalItems=todayBlocks.length+todayTasks.length;
+  const doneItems=doneBlocks+doneTasks;
   const pct=totalItems>0?Math.round((doneItems/totalItems)*100):0;
+  const blockXP=todayBlocks.filter(b=>DB.isBlockDone(b.id)).reduce((s,b)=>s+(b.xp||0),0);
+  const choreXP=todayTasks.filter(t=>DB.isTaskDone(t.id)).reduce((s,t)=>s+(t.xp||0),0);
   const streak=DB.getStreak();const{rank,total,next,pct:rpct}=getRankData();
-  el('d-chore-xp').textContent=DB.getSchoolXPToday();
-  el('d-school-xp').textContent=schoolXP;
+  el('d-chore-xp').textContent=choreXP;
+  el('d-school-xp').textContent=blockXP;
   el('d-rank-abbr').textContent=rank.abbr;
   el('d-rank-abbr2').textContent=rank.abbr;
   el('d-rank-name').textContent=rank.name;
@@ -2247,12 +2251,13 @@ function renderDebrief(){
   el('d-lxp').textContent=total.toLocaleString();
   el('d-nxp').textContent=next?next.min.toLocaleString():'MAX';
   el('d-streak').textContent=streak;
+  var kidName=DB.config.kidName||'there';
   let score,grade,color,msg;
   if(pct===100){score='100%';grade='Perfect Day';color='var(--grn)';msg='Every single task done, '+kidName+'! That\'s a perfect day. You earned it.';}
-  else if(pct>=80){score=pct+'%';grade='Strong Day';color='var(--xp)';msg='Really solid effort. A few things left - finish strong tomorrow.';}
+  else if(pct>=80){score=pct+'%';grade='Strong Day';color='var(--xp)';msg='Really solid effort. A few things left — finish strong tomorrow.';}
   else if(pct>=50){score=pct+'%';grade='Getting There';color='var(--txt)';msg='You\'ve got more in you. Tomorrow is another shot at it.';}
-  else if(pct>0){score=pct+'%';grade='Rough Day';color='var(--red)';msg='Not your best day - that\'s okay. Tomorrow is a fresh start.';}
-  else{score='0%';grade='No XP Yet';color='var(--red)';msg='Nothing checked off yet. There\'s still time - go get it.';}
+  else if(pct>0){score=pct+'%';grade='Rough Day';color='var(--red)';msg='Not your best day — that\'s okay. Tomorrow is a fresh start.';}
+  else{score='0%';grade='No XP Yet';color='var(--red)';msg='Nothing checked off yet. There\'s still time — go get it.';}
   el('d-score').textContent=score;el('d-score').style.color=color;
   el('d-grade').textContent=grade;el('d-msg').textContent=msg;
   el('d-streak-desc').textContent=
@@ -3096,44 +3101,39 @@ var THEME_RANKS = {
 
 var THEME_WORDING = {
   minimal:{
-    xpLabel:'Daily points',xpUnit:'',
+    xpLabel:'XP earned',xpUnit:'',
     greetingMorning:'Ready for today?',
     greetingAfternoon:"Let's do this.",
     todSuffix:'.',
-    navHome:'Home',navSchedule:'Day',navSchool:'School',
-    navTasks:'Tasks',navRewards:'Rewards',navReport:'Review',
+    navHome:'Home',navMission:'Mission',navRewards:'Rewards',navReport:'Report',
   },
   princess:{
     xpLabel:'Stars earned ✨',xpUnit:' ✨',
     greetingMorning:'Time to shine! ✨',
     greetingAfternoon:"You're doing amazing! ✨",
     todSuffix:'! ✨',
-    navHome:'Home',navSchedule:'Day',navSchool:'Learn',
-    navTasks:'Goals',navRewards:'Wishes',navReport:'Review',
+    navHome:'Home',navMission:'Quests',navRewards:'Wishes',navReport:'Review',
   },
   ops:{
     xpLabel:'Combat XP',xpUnit:'',
     greetingMorning:'Mission ready.',
     greetingAfternoon:'Mission in progress.',
     todSuffix:'.',
-    navHome:'Base',navSchedule:'Ops',navSchool:'Intel',
-    navTasks:'Tasks',navRewards:'Rank',navReport:'Debrief',
+    navHome:'Base',navMission:'Ops',navRewards:'Rank',navReport:'Debrief',
   },
   superhero:{
     xpLabel:'Hero XP',xpUnit:'',
     greetingMorning:'Hero time!',
     greetingAfternoon:"Let's go!",
     todSuffix:'!',
-    navHome:'Home',navSchedule:'Map',navSchool:'Train',
-    navTasks:'Quest',navRewards:'Loot',navReport:'HQ Report',
+    navHome:'Home',navMission:'Missions',navRewards:'Loot',navReport:'HQ',
   },
   littlekid:{
     xpLabel:'Stars! ⭐',xpUnit:' ⭐',
     greetingMorning:"Let's GO! 🚀",
     greetingAfternoon:'Keep it up! 🌟',
     todSuffix:'!',
-    navHome:'Home',navSchedule:'Today',navSchool:'School',
-    navTasks:'To-do',navRewards:'Prizes',navReport:'My day! 🌟',
+    navHome:'Home',navMission:'Today',navRewards:'Prizes',navReport:'My Day',
   },
 };
 
@@ -3162,9 +3162,10 @@ function applyStackTheme(t){
 function updateNavLabels(){
   var w=getThemeWording();
   var map={
-    'nb-brief':w.navHome,'nb-mission':w.navSchedule,
-    'nb-school':w.navSchool,'nb-activities':w.navTasks,
-    'nb-rewards':w.navRewards,'nb-debrief':w.navReport
+    'nb-brief':w.navHome,
+    'nb-activities':w.navMission,
+    'nb-rewards':w.navRewards,
+    'nb-debrief':w.navReport
   };
   Object.keys(map).forEach(function(id){
     var btn=el(id);
