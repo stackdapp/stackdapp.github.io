@@ -224,7 +224,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 
 /* -- MAIN -- */
 .main-layout{flex:1;overflow:hidden;position:relative;}
-.content{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+.content{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-bottom:env(safe-area-inset-bottom,0px);}
 .screen{display:none;padding:16px 16px calc(72px + env(safe-area-inset-bottom));box-sizing:border-box;touch-action:pan-y;}.screen.active{display:block;}
 
 /* -- NAVBAR -- */
@@ -2681,24 +2681,26 @@ function updateUptime(){const s=Math.floor((Date.now()-startTime)/1000);const up
 function getSystemTheme(){return window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';}
 function getTheme(){return DB.config.theme||'auto';}
 function applyTheme(pref){
-  applyStackTheme(DB.config.stackTheme||'minimal');
   const root=document.documentElement;
   const btn=el('theme-toggle');
   const resolved=pref==='auto'?getSystemTheme():pref;
+  // Set data-theme FIRST before applyStackTheme so overrides work correctly
   root.removeAttribute('data-theme');
   if(pref==='dark')root.setAttribute('data-theme','dark');
   else if(pref==='light')root.setAttribute('data-theme','light');
+  // Then apply stack theme (which may further adjust data-theme for forced themes)
+  applyStackTheme(DB.config.stackTheme||'minimal');
   const meta=document.querySelector('meta[name="theme-color"]');
   if(meta)meta.content=resolved==='light'?'#fef6fb':'#0D9488';
   if(btn)btn.textContent=resolved==='light'?'🌙':'☀️';
+  // Re-render so any inline styles pick up new theme
+  try{renderBrief();}catch(e){}
+  try{renderMission();}catch(e){}
 }
 function toggleTheme(){
   const cur=getTheme();const sys=getSystemTheme();
   const next=cur==='auto'?(sys==='dark'?'light':'dark'):'auto';
   DB.config.theme=next;DB.save();applyTheme(next);
-  // Re-render screens so inline styles pick up new theme
-  renderBrief();renderMission();
-  try{renderTasks();}catch(e){}
   showToast(next==='auto'?'Following system theme':next==='light'?'Light mode on':'Dark mode on');
 }
 window.matchMedia('(prefers-color-scheme:light)').addEventListener('change',()=>{if(getTheme()==='auto')applyTheme('auto');});
@@ -3297,9 +3299,6 @@ function applyStackTheme(t){
   }
   updateNavLabels();
   updateKidName();
-  // Re-render so inline styles pick up new theme vars
-  try{renderBrief();}catch(e){}
-  try{renderMission();}catch(e){}
 }
 
 function updateNavLabels(){
