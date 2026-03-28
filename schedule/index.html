@@ -24,8 +24,7 @@
     const saved=JSON.parse(localStorage.getItem('v4_theme'));
     const sys=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';
     const resolved=(!saved||saved==='auto')?sys:saved;
-    if(resolved==='light')document.documentElement.setAttribute('data-theme','light');
-    else if(saved==='dark')document.documentElement.setAttribute('data-theme','dark');
+    document.documentElement.setAttribute('data-theme',resolved);
   }catch(e){}
 })();
 </script>
@@ -2758,9 +2757,7 @@ function applyTheme(pref){
   const btn=el('theme-toggle');
   const resolved=pref==='auto'?getSystemTheme():pref;
   // Set data-theme FIRST before applyStackTheme so overrides work correctly
-  root.removeAttribute('data-theme');
-  if(pref==='dark')root.setAttribute('data-theme','dark');
-  else if(pref==='light')root.setAttribute('data-theme','light');
+  root.setAttribute('data-theme', resolved);
   // Then apply stack theme (which may further adjust data-theme for forced themes)
   applyStackTheme(DB.config.stackTheme||'minimal');
   const meta=document.querySelector('meta[name="theme-color"]');
