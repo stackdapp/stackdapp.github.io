@@ -196,16 +196,11 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 @supports not (height: env(safe-area-inset-top)){
   #safe-top{height:0;min-height:0;}
 }
-#safe-bottom{
-  position:fixed;
-  bottom:0;left:0;right:0;
-  height:env(safe-area-inset-bottom,0px);
-  background:var(--bg2);
-  z-index:99;
-}
+#safe-bottom{display:none;}
 
 
 .navbar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0px);}
+.navbar::after{content:'';position:absolute;bottom:calc(-1 * env(safe-area-inset-bottom,0px));left:0;right:0;height:env(safe-area-inset-bottom,0px);background:inherit;pointer-events:none;}
 /* -- TOPBAR -- */
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
   display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
@@ -2766,9 +2761,7 @@ function applyTheme(pref){
   // Re-render so any inline styles pick up new theme
   try{renderBrief();}catch(e){}
   try{renderMission();}catch(e){}
-  // Sync safe-bottom background to current bg2
-  var sb=el('safe-bottom');
-  if(sb)sb.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'';
+
 }
 function toggleTheme(){
   const cur=getTheme();const sys=getSystemTheme();
