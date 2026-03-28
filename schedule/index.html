@@ -1175,8 +1175,70 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 .loading-msg{font-size:12px;color:var(--txt3);text-align:center;padding:20px;font-weight:500;}
 
 @media(max-width:600px){
+  /* ── SCHOOL LAYOUT ── */
   .school-layout{grid-template-columns:1fr;}
   .two-col{grid-template-columns:1fr 1fr;}
+
+  /* ── TOPBAR: hide clock + compress right side ── */
+  .tb-clock-wrap{display:none;}
+  .live-chip{display:none;}
+  .tb-r{gap:6px;}
+  .parent-btn{font-size:11px;padding:4px 8px;}
+  .theme-toggle{font-size:12px;padding:4px 7px;}
+  .tb-title{font-size:13px;}
+  .tb-sub{font-size:9px;}
+  .tb-s{width:26px;height:26px;font-size:11px;}
+  .topbar{padding:0 10px;min-height:50px;}
+
+  /* ── MAIN CONTENT padding ── */
+  .screen{padding:12px 10px calc(68px + env(safe-area-inset-bottom));}
+
+  /* ── GRIDS: collapse to single column ── */
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .editor-grid{grid-template-columns:1fr;}
+  .editor-grid-3{grid-template-columns:1fr 1fr;}
+  .subitem-row{grid-template-columns:1fr 72px 60px 28px;}
+  .btn-row{grid-template-columns:1fr 1fr;}
+
+  /* ── FONT SCALING ── */
+  .bc-timer{font-size:34px !important;}
+  .sh-timer{font-size:52px;}
+  .xp-val{font-size:32px;}
+  .sxp-val{font-size:20px;}
+  .rh-score{font-size:50px;}
+  .sc-score-big{font-size:56px;}
+  .streak-num{font-size:32px;}
+  .stat-box-val{font-size:20px;}
+  .g-name{font-size:22px;}
+
+  /* ── BLOCK CARD ── */
+  .block-card{padding:14px;}
+  .bc-name{font-size:17px;}
+
+  /* ── GREETING ── */
+  .greeting-card{padding:16px 14px;}
+
+  /* ── UPCOMING LIST ── */
+  .up-lbl{font-size:12px;}
+  .up-time{font-size:10px;}
+
+  /* ── REWARD CARDS ── */
+  .reward-card{flex-wrap:wrap;}
+  .reward-btn{margin-top:6px;width:100%;}
+
+  /* ── PARENT TABS ── */
+  .ptab{font-size:10px;padding:7px 2px;}
+
+  /* ── PIN MODAL ── */
+  .pin-box{min-width:0;width:calc(100vw - 40px);padding:24px 16px;}
+
+  /* ── STAT CELL BOXES ── */
+  .stat-cell-box{padding:10px;}
+  .stat-cell-val{font-size:18px;}
+
+  /* ── WALKTHROUGH ── */
+  .wt-title{font-size:20px;}
+  .wt-body{font-size:14px;}
 }
 </style>
 </head>
