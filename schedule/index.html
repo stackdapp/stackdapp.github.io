@@ -199,7 +199,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 }
 
 
-.navbar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
+.navbar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0px);}
 /* -- TOPBAR -- */
 .topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
   display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
@@ -225,7 +225,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 /* -- MAIN -- */
 .main-layout{flex:1;overflow:hidden;position:relative;}
 .content{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;touch-action:pan-y;}
-.screen{display:none;padding:16px 16px 72px;box-sizing:border-box;touch-action:pan-y;}.screen.active{display:block;}
+.screen{display:none;padding:16px 16px calc(72px + env(safe-area-inset-bottom));box-sizing:border-box;touch-action:pan-y;}.screen.active{display:block;}
 
 /* -- NAVBAR -- */
 
@@ -2696,6 +2696,9 @@ function toggleTheme(){
   const cur=getTheme();const sys=getSystemTheme();
   const next=cur==='auto'?(sys==='dark'?'light':'dark'):'auto';
   DB.config.theme=next;DB.save();applyTheme(next);
+  // Re-render screens so inline styles pick up new theme
+  renderBrief();renderMission();
+  try{renderTasks();}catch(e){}
   showToast(next==='auto'?'Following system theme':next==='light'?'Light mode on':'Dark mode on');
 }
 window.matchMedia('(prefers-color-scheme:light)').addEventListener('change',()=>{if(getTheme()==='auto')applyTheme('auto');});
@@ -3294,6 +3297,9 @@ function applyStackTheme(t){
   }
   updateNavLabels();
   updateKidName();
+  // Re-render so inline styles pick up new theme vars
+  try{renderBrief();}catch(e){}
+  try{renderMission();}catch(e){}
 }
 
 function updateNavLabels(){
