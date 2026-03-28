@@ -197,6 +197,13 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 @supports not (height: env(safe-area-inset-top)){
   #safe-top{height:0;min-height:0;}
 }
+#safe-bottom{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  height:env(safe-area-inset-bottom,0px);
+  background:var(--bg2);
+  z-index:99;
+}
 
 
 .navbar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom,0px);}
@@ -224,7 +231,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 
 /* -- MAIN -- */
 .main-layout{flex:1;overflow:hidden;position:relative;}
-.content{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-bottom:env(safe-area-inset-bottom,0px);}
+.content{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch;touch-action:pan-y;}
 .screen{display:none;padding:16px 16px calc(72px + env(safe-area-inset-bottom));box-sizing:border-box;touch-action:pan-y;}.screen.active{display:block;}
 
 /* -- NAVBAR -- */
@@ -1224,6 +1231,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 <!-- APP -->
 <div id="app">
   <div id="safe-top"></div>
+  <div id="safe-bottom"></div>
   <div class="topbar">
     <div class="tb-l">
       <div class="tb-s">S</div>
@@ -2696,6 +2704,9 @@ function applyTheme(pref){
   // Re-render so any inline styles pick up new theme
   try{renderBrief();}catch(e){}
   try{renderMission();}catch(e){}
+  // Sync safe-bottom background to current bg2
+  var sb=el('safe-bottom');
+  if(sb)sb.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'';
 }
 function toggleTheme(){
   const cur=getTheme();const sys=getSystemTheme();
