@@ -1738,12 +1738,21 @@ function el(id){
 
 // -- DEFAULT DATA --
 const DEFAULT_SCHEDULE = [
-  {id:'b1',block:'Wake Up',category:'wake',start:'07:00',end:'07:30',xp:20,days:'all',items:[]},
-  {id:'b2',block:'Breakfast',category:'meal',start:'07:30',end:'08:00',xp:10,days:'all',items:[]},
-  {id:'b3',block:'School',category:'school',start:'08:30',end:'14:30',xp:50,days:'mon,tue,wed,thu,fri',items:[]},
-  {id:'b4',block:'Free Time',category:'free',start:'15:00',end:'17:00',xp:0,days:'all',items:[]},
-  {id:'b5',block:'Dinner',category:'meal',start:'17:30',end:'18:00',xp:10,days:'all',items:[]},
-  {id:'b6',block:'Wind Down',category:'bed',start:'20:00',end:'21:00',xp:20,days:'all',items:[]},
+  {id:'b1', block:'Sleep',       category:'bed',    start:'00:00',end:'06:30',xp:0,  days:'all',items:[]},
+  {id:'b2', block:'Wake Up',     category:'wake',   start:'06:30',end:'07:00',xp:20, days:'all',items:[]},
+  {id:'b3', block:'Get Ready',   category:'bath',   start:'07:00',end:'07:30',xp:15, days:'all',items:[]},
+  {id:'b4', block:'Breakfast',   category:'meal',   start:'07:30',end:'08:00',xp:10, days:'all',items:[]},
+  {id:'b5', block:'School',      category:'school', start:'08:00',end:'15:00',xp:50, days:'mon,tue,wed,thu,fri',items:[]},
+  {id:'b6', block:'Free Time',   category:'free',   start:'08:00',end:'15:00',xp:0,  days:'sat,sun',items:[]},
+  {id:'b7', block:'Snack & Chill',category:'free',  start:'15:00',end:'15:30',xp:0,  days:'all',items:[]},
+  {id:'b8', block:'Homework',    category:'school', start:'15:30',end:'16:30',xp:30, days:'mon,tue,wed,thu,fri',items:[]},
+  {id:'b9', block:'Free Time',   category:'free',   start:'15:30',end:'18:00',xp:0,  days:'sat,sun',items:[]},
+  {id:'b10',block:'Free Time',   category:'free',   start:'16:30',end:'18:00',xp:0,  days:'mon,tue,wed,thu,fri',items:[]},
+  {id:'b11',block:'Dinner',      category:'meal',   start:'18:00',end:'18:30',xp:10, days:'all',items:[]},
+  {id:'b12',block:'Family Time', category:'free',   start:'18:30',end:'19:30',xp:10, days:'all',items:[]},
+  {id:'b13',block:'Wind Down',   category:'bath',   start:'19:30',end:'20:00',xp:15, days:'all',items:[]},
+  {id:'b14',block:'Bedtime',     category:'bed',    start:'20:00',end:'21:00',xp:20, days:'all',items:[]},
+  {id:'b15',block:'Sleep',       category:'bed',    start:'21:00',end:'23:59',xp:0,  days:'all',items:[]},
 ];
 const DEFAULT_TASKS = [
   {id:'t1',name:'Make bed',xp:20,days:'all',category:'chore'},
