@@ -161,9 +161,14 @@ body{height:100%;overflow:hidden;background:var(--bg);font-family:'Sora',sans-se
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;pointer-events:none;}
 .sp-logo{display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .5s .1s ease forwards;}
 .sp-s{width:48px;height:48px;background:var(--accent);border-radius:13px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:#fff;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:4px;padding:11px 10px;flex-shrink:0;
   box-shadow:0 0 24px rgba(13,148,136,.35);}
+.sp-s .bar{background:#fff;border-radius:2px;height:4px;width:65%;}
+.sp-s .bar:nth-child(1){margin-left:0;}
+.sp-s .bar:nth-child(2){margin-left:35%;}
+.sp-s .bar:nth-child(3){margin-left:10%;}
+.sp-s .bar:nth-child(4){margin-left:40%;}
 .sp-wordmark{font-size:30px;font-weight:800;color:var(--txt);letter-spacing:-1px;}
 .sp-sub{font-size:13px;color:var(--txt3);font-weight:400;letter-spacing:.3px;
   opacity:0;animation:fadeUp .4s .3s ease forwards;}
@@ -212,8 +217,13 @@ body{height:100%;overflow:hidden;background:var(--bg);font-family:'Sora',sans-se
   min-height:56px;}
 .tb-l{display:flex;align-items:center;gap:10px;min-width:0;overflow:hidden;}
 .tb-s{width:30px;height:30px;background:var(--accent);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:2.5px;padding:7px 6px;flex-shrink:0;}
+.tb-s .bar{background:#fff;border-radius:1.5px;height:2.5px;width:65%;}
+.tb-s .bar:nth-child(1){margin-left:0;}
+.tb-s .bar:nth-child(2){margin-left:35%;}
+.tb-s .bar:nth-child(3){margin-left:10%;}
+.tb-s .bar:nth-child(4){margin-left:40%;}
 .tb-info{display:flex;flex-direction:column;min-width:0;}
 .tb-title{font-size:15px;font-weight:700;color:var(--txt);letter-spacing:-.4px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tb-sub{font-size:10px;color:var(--txt3);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -1361,7 +1371,7 @@ body{height:100%;overflow:hidden;background:var(--bg);font-family:'Sora',sans-se
 <!-- SPLASH -->
 <div id="splash">
   <div class="sp-logo">
-    <div class="sp-s">S</div>
+    <div class="sp-s"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
     <div class="sp-wordmark">stackd</div>
   </div>
   <div class="sp-sub">Make your day feel like a game.</div>
@@ -1378,7 +1388,7 @@ body{height:100%;overflow:hidden;background:var(--bg);font-family:'Sora',sans-se
   <div id="safe-bottom"></div>
   <div class="topbar">
     <div class="tb-l">
-      <div class="tb-s">S</div>
+      <div class="tb-s"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
       <div class="tb-info">
         <div class="tb-title" id="app-title">stackd</div>
         <div class="tb-sub" id="tb-sub">Daily routine</div>
