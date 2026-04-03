@@ -330,6 +330,35 @@ footer a:hover{color:var(--teal2);}
   .nav-links .nav-link:not(.nav-cta){display:none;}
   .phone{width:220px;}
 }
+
+/* ── EXIT POPUP ── */
+#exit-overlay{position:fixed;inset:0;z-index:99990;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+#exit-overlay.show{display:flex;}
+#exit-box{background:#1a1714;border:1px solid #2e2a25;border-radius:24px;padding:36px 32px;width:100%;max-width:460px;position:relative;}
+#exit-box h2{font-size:24px;font-weight:800;color:#f0ebe4;letter-spacing:-.4px;margin-bottom:8px;}
+#exit-box p{font-size:14px;color:#7a7168;line-height:1.6;margin-bottom:24px;}
+.ep-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#4a4540;font-size:20px;cursor:pointer;padding:4px 8px;line-height:1;}
+.ep-close:hover{color:#f0ebe4;}
+.ep-field{margin-bottom:16px;}
+.ep-label{font-size:11px;font-weight:700;color:#7a7168;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;display:block;}
+.ep-input{width:100%;background:#111;border:1px solid #2e2a25;border-radius:10px;padding:12px 14px;font-family:'Sora',sans-serif;font-size:14px;color:#f0ebe4;outline:none;transition:border-color .15s;}
+.ep-input:focus{border-color:#0D9488;}
+.ep-input::placeholder{color:#4a4540;}
+.ep-radio-group{display:flex;gap:8px;flex-wrap:wrap;}
+.ep-radio{display:none;}
+.ep-radio-label{padding:8px 14px;border-radius:20px;border:1px solid #2e2a25;font-size:12px;font-weight:600;color:#7a7168;cursor:pointer;transition:all .15s;}
+.ep-radio:checked + .ep-radio-label{border-color:#0D9488;color:#14b8a6;background:rgba(13,148,136,.1);}
+.ep-select{width:100%;background:#111;border:1px solid #2e2a25;border-radius:10px;padding:12px 14px;font-family:'Sora',sans-serif;font-size:14px;color:#f0ebe4;outline:none;appearance:none;cursor:pointer;}
+.ep-select:focus{border-color:#0D9488;}
+.ep-submit{width:100%;background:#0D9488;border:none;border-radius:10px;padding:14px;font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:#fff;cursor:pointer;margin-top:8px;transition:all .15s;}
+.ep-submit:hover{background:#14b8a6;}
+.ep-submit:active{transform:scale(.98);}
+.ep-success{text-align:center;padding:20px 0;}
+.ep-success-icon{font-size:48px;margin-bottom:16px;}
+.ep-success h3{font-size:20px;font-weight:800;color:#f0ebe4;margin-bottom:8px;}
+.ep-success p{font-size:14px;color:#7a7168;}
+.ep-legal{font-size:10px;color:#4a4540;text-align:center;margin-top:12px;line-height:1.6;}
+
 </style>
 </head>
 <body>
@@ -341,14 +370,14 @@ footer a:hover{color:var(--teal2);}
   </a>
   <div class="nav-links">
     <a class="nav-link" href="/guide">Guide</a>
-    <a class="nav-link" href="/feedback">Feedback</a>
+    
     <!-- nav cta hidden until live -->
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag"><span></span>Built for kids with ADHD &amp; autism</div>
+  <div class="hero-tag"><span></span>Built for kids who think differently</div>
   <h1>Make every day<span class="line2" style="color:#16A34A;">feel like a game.</span></h1>
   <p>Two apps that turn your kid's daily routine and homeschool into something they actually want to do, with timers, XP, and rewards that make structure stick.</p>
 
@@ -508,11 +537,134 @@ footer a:hover{color:var(--teal2);}
       <a href="/schedule">Stackd Plan</a>
       <a href="/school">Stackd School</a>
       <a href="/guide">Quick Start Guide</a>
-      <a href="/feedback">Feedback</a>
+      
     </div>
     <p>Stackd Apps · mystackd.com · Built for kids who think differently.</p>
   </div>
 </footer>
+
+
+<!-- EXIT INTENT POPUP -->
+<div id="exit-overlay">
+  <div id="exit-box">
+    <button class="ep-close" onclick="closeExitPopup()">✕</button>
+    <div id="ep-form-view">
+      <h2>Stay in the loop.</h2>
+      <p>Get notified when Stackd launches on the App Store and Google Play.</p>
+      <form id="ep-form" onsubmit="submitExitForm(event)">
+        <div class="ep-field">
+          <label class="ep-label">Your email</label>
+          <input class="ep-input" type="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="ep-field">
+          <label class="ep-label">Which app interests you?</label>
+          <div class="ep-radio-group">
+            <input class="ep-radio" type="radio" name="app_interest" id="ep-plan" value="Stackd Plan">
+            <label class="ep-radio-label" for="ep-plan">Stackd Plan</label>
+            <input class="ep-radio" type="radio" name="app_interest" id="ep-school" value="Stackd School">
+            <label class="ep-radio-label" for="ep-school">Stackd School</label>
+            <input class="ep-radio" type="radio" name="app_interest" id="ep-both" value="Both" checked>
+            <label class="ep-radio-label" for="ep-both">Both</label>
+          </div>
+        </div>
+        <div class="ep-field">
+          <label class="ep-label">Biggest challenge with your kid's routine? <span style="color:#4a4540;font-weight:400;">(optional)</span></label>
+          <input class="ep-input" type="text" name="routine_challenge" placeholder="e.g. Getting started in the morning">
+        </div>
+        <div class="ep-field">
+          <label class="ep-label">How did you find us? <span style="color:#4a4540;font-weight:400;">(optional)</span></label>
+          <select class="ep-select" name="how_found">
+            <option value="">Select one</option>
+            <option value="Google search">Google search</option>
+            <option value="Social media">Social media</option>
+            <option value="Word of mouth">Word of mouth</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button type="submit" class="ep-submit">Notify me when it launches →</button>
+        <div class="ep-legal">No spam. Launch news only. Unsubscribe anytime.</div>
+      </form>
+    </div>
+    <div id="ep-success-view" class="ep-success" style="display:none;">
+      <div class="ep-success-icon">🎉</div>
+      <h3>You're on the list!</h3>
+      <p>We'll let you know the moment Stackd hits the App Store and Google Play.</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+var _exitShown = false;
+var _formspree = 'https://formspree.io/f/mnjogzpk';
+var _sheet = 'https://script.google.com/macros/s/AKfycby4velI0pp5YrDtCZCvexOIHSTvasHDLrWcRZ1BlpL7mFgAOg60xonn1F3kk3X8iNeo/exec';
+
+function showExitPopup(){
+  if(_exitShown || sessionStorage.getItem('ep_shown'))return;
+  _exitShown=true;
+  sessionStorage.setItem('ep_shown','1');
+  document.getElementById('exit-overlay').classList.add('show');
+}
+
+function closeExitPopup(){
+  document.getElementById('exit-overlay').classList.remove('show');
+}
+
+// Desktop: exit intent
+document.addEventListener('mouseleave',function(e){
+  if(e.clientY<=0)showExitPopup();
+});
+
+// Mobile: 70% scroll depth
+window.addEventListener('scroll',function(){
+  var pct=(window.scrollY+window.innerHeight)/document.body.scrollHeight;
+  if(pct>=0.7)showExitPopup();
+},{passive:true});
+
+// Click outside to close
+document.getElementById('exit-overlay').addEventListener('click',function(e){
+  if(e.target===this)closeExitPopup();
+});
+
+async function submitExitForm(e){
+  e.preventDefault();
+  var form=e.target;
+  var btn=form.querySelector('.ep-submit');
+  btn.textContent='Sending...';btn.disabled=true;
+
+  var source = window.location.pathname || '/';
+  var data={
+    email: form.email.value,
+    app_interest: form.app_interest.value,
+    routine_challenge: form.routine_challenge.value,
+    how_found: form.how_found.value,
+    source_page: source
+  };
+
+  try{
+    // Send to Formspree
+    await fetch(_formspree,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(data)
+    });
+  }catch(err){}
+
+  try{
+    // Log to Google Sheet
+    await fetch(_sheet,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    });
+  }catch(err){}
+
+  document.getElementById('ep-form-view').style.display='none';
+  document.getElementById('ep-success-view').style.display='block';
+  setTimeout(closeExitPopup, 3000);
+}
+</script>
 
 </body>
 </html>
