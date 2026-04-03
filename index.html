@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stackd — Build great days.</title>
-<meta name="description" content="A daily routine and homeschool app built for kids with ADHD and autism. XP, rewards, timers, and themes your kid will actually want to use.">
+<title>Stackd Apps — Make every day feel like a game.</title>
+<meta name="description" content="Two apps that turn your kid's daily routine and homeschool into something they actually want to do. XP, timers, rewards, and themes built for kids with ADHD and autism.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -54,8 +54,11 @@ nav{
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .logo-mark{width:34px;height:34px;background:var(--teal);border-radius:9px;
   display:flex;flex-direction:column;justify-content:center;gap:3.5px;padding:8px 7px;flex-shrink:0;}
-.bar{background:#fff;border-radius:2px;height:3px;}
-.bar:nth-child(1){width:100%;}.bar:nth-child(2){width:72%;}.bar:nth-child(3){width:48%;}
+.bar{background:#fff;border-radius:2px;height:3.5px;width:65%;}
+.bar:nth-child(1){margin-left:0;}
+.bar:nth-child(2){margin-left:30%;}
+.bar:nth-child(3){margin-left:10%;}
+.bar:nth-child(4){margin-left:35%;}
 .logo-name{font-size:17px;font-weight:800;color:var(--txt);letter-spacing:-.3px;}
 .nav-links{display:flex;align-items:center;gap:8px;}
 .nav-link{font-size:13px;font-weight:600;color:var(--txt2);text-decoration:none;
@@ -257,7 +260,7 @@ footer a:hover{color:var(--teal2);}
 
 <nav>
   <a class="nav-logo" href="/">
-    <div class="logo-mark"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+    <div class="logo-mark"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
     <div class="logo-name">stackd</div>
   </a>
   <div class="nav-links">
@@ -270,11 +273,11 @@ footer a:hover{color:var(--teal2);}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-tag"><span></span>Built for kids with ADHD &amp; autism</div>
-  <h1>Build great<span class="line2">days.</span></h1>
-  <p>A daily routine and homeschool app that makes schedules, tasks, and rewards actually work — with XP your kid earns and spends on things they want.</p>
+  <h1>Make every day<span class="line2">feel like a game.</span></h1>
+  <p>Two apps that turn your kid's daily routine and homeschool into something they actually want to do — with timers, XP, and rewards that make structure stick.</p>
   <div class="hero-btns">
-    <a href="/schedule" class="btn-primary">📋 Daily Schedule →</a>
-    <a href="/school" class="btn-ghost">📚 School Mode →</a>
+    <a href="/schedule" class="btn-primary">📋 Stackd Plan →</a>
+    <a href="/school" class="btn-ghost">📚 Stackd School →</a>
   </div>
 
   <!-- Phone mockup -->
@@ -309,20 +312,19 @@ footer a:hover{color:var(--teal2);}
       </div>
       <div class="p-nb">
         <div class="p-nb-i on">🏠<span>Home</span></div>
-        <div class="p-nb-i">🗓<span>Day</span></div>
-        <div class="p-nb-i">📚<span>School</span></div>
-        <div class="p-nb-i">✅<span>Tasks</span></div>
+        <div class="p-nb-i">🗓<span>Mission</span></div>
         <div class="p-nb-i">⭐<span>Rewards</span></div>
+        <div class="p-nb-i">📊<span>Report</span></div>
       </div>
     </div>
   </div>
 
   <div class="themes-float">
-    <div class="theme-chip on">🎯 Special Ops</div>
-    <div class="theme-chip">✨ Enchanted</div>
-    <div class="theme-chip">🦸 Hero</div>
-    <div class="theme-chip">🌿 Adventure</div>
-    <div class="theme-chip">☁️ Calm</div>
+    <div class="theme-chip on">Special Ops</div>
+    <div class="theme-chip">Superhero</div>
+    <div class="theme-chip">Enchanted</div>
+    <div class="theme-chip">Sprout</div>
+    <div class="theme-chip">Modern</div>
   </div>
 </section>
 
@@ -352,17 +354,17 @@ footer a:hover{color:var(--teal2);}
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
         <h3>Parent PIN control</h3>
-        <p>Everything is set up by you, locked behind a PIN. Kids can use the app freely — they just can't edit their own rewards.</p>
+        <p>Everything is set up by you. Once you set a PIN, kids can use the app freely but can't edit their own rewards or settings.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🎨</div>
         <h3>5 themes, their choice</h3>
-        <p>Special Ops, Hero, Enchanted, Adventure, or Calm. The app feels like theirs — because it is.</p>
+        <p>Special Ops, Superhero, Enchanted, Sprout, or Modern. The app feels like theirs — because it is.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📵</div>
-        <h3>No account, no ads, offline</h3>
-        <p>Save to your home screen and it works anywhere. No login, no subscription, no data collected. Just the app.</p>
+        <h3>No ads, no data collected</h3>
+        <p>Everything stays on your device. No account needed, no ads, no tracking. Free to start — upgrade for unlimited everything.</p>
       </div>
     </div>
   </div>
@@ -371,23 +373,23 @@ footer a:hover{color:var(--teal2);}
 <!-- APP CHOICE -->
 <section class="section" style="padding-top:0;">
   <div class="wrap">
-    <div class="section-tag">Two versions</div>
+    <div class="section-tag">Two apps</div>
     <h2>Pick what <span>fits your family.</span></h2>
-    <p class="lead">Use one, or both. Each is a standalone app saved to your home screen.</p>
+    <p class="lead">Use one, or both. Free to start — upgrade to Premium for unlimited everything. 14-day free trial, then $7.99/mo or $59.99/yr.</p>
 
     <div class="app-grid">
       <a href="/schedule" class="app-card">
         <div class="app-icon">📋</div>
-        <div class="app-label">Stackd Schedule</div>
-        <div class="app-name">Daily Routine</div>
-        <div class="app-desc">Schedule blocks, daily tasks, XP, rewards, and a debrief. For managing your kid's whole day from wake-up to bedtime.</div>
+        <div class="app-label">Daily Routine</div>
+        <div class="app-name">Stackd Plan</div>
+        <div class="app-desc">Make your day feel like a game. Schedule blocks, chores, XP, rewards, and a daily report. For managing your kid's whole day from wake-up to bedtime.</div>
         <div class="app-arrow">→</div>
       </a>
       <a href="/school" class="app-card">
         <div class="app-icon">📚</div>
-        <div class="app-label">Stackd School</div>
-        <div class="app-name">Homeschool Mode</div>
-        <div class="app-desc">Subject timers with gentle warnings, school XP, and session tracking. Built for homeschool days or after-school work.</div>
+        <div class="app-label">Homeschool</div>
+        <div class="app-name">Stackd School</div>
+        <div class="app-desc">Make school feel like a game. Subject timers, school XP, rewards, and streaks. Built for homeschool kids ages 5-14.</div>
         <div class="app-arrow">→</div>
       </a>
     </div>
@@ -407,10 +409,10 @@ footer a:hover{color:var(--teal2);}
 <!-- TAGLINE -->
 <section class="tagline-section">
   <div class="wrap">
-    <div class="tagline">Build<br><span>great days.</span></div>
-    <div class="tagline-sub">Free to use. No account needed. Works offline.</div>
+    <div class="tagline">Make every<br><span>day count.</span></div>
+    <div class="tagline-sub">Free to start. No account needed. No ads.</div>
     <div style="margin-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="/schedule" class="btn-primary">Get Stackd Schedule →</a>
+      <a href="/schedule" class="btn-primary">Get Stackd Plan →</a>
       <a href="/school" class="btn-ghost">Get Stackd School →</a>
     </div>
   </div>
@@ -419,12 +421,12 @@ footer a:hover{color:var(--teal2);}
 <footer>
   <div class="wrap">
     <div class="footer-links">
-      <a href="/schedule">Schedule App</a>
-      <a href="/school">School App</a>
+      <a href="/schedule">Stackd Plan</a>
+      <a href="/school">Stackd School</a>
       <a href="/guide">Quick Start Guide</a>
-      <a href="/feedback">Beta Feedback</a>
+      <a href="/feedback">Feedback</a>
     </div>
-    <p>Stackd · mystackd.com · Built for kids who think differently.</p>
+    <p>Stackd Apps · mystackd.com · Built for kids who think differently.</p>
   </div>
 </footer>
 
