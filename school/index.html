@@ -6,14 +6,9 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<title>Stackd - School</title>
-<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlN0YWNrZCBTY2hvb2wiLCAic2hvcnRfbmFtZSI6ICJTdGFja2QiLCAiZGVzY3JpcHRpb24iOiAiSG9tZXNjaG9vbCB0cmFja2VyIGZvciBraWRzIiwgInN0YXJ0X3VybCI6ICIvc2Nob29sIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwRDk0ODgiLCAidGhlbWVfY29sb3IiOiAiIzBEOTQ4OCIsICJjYXRlZ29yaWVzIjogWyJlZHVjYXRpb24iLCAia2lkcyIsICJwcm9kdWN0aXZpdHkiXX0=">
+<title>Stackd School — Live Demo</title>
 <meta name="theme-color" content="#0D9488">
 <meta name="application-name" content="Stackd School">
-<meta name="apple-mobile-web-app-title" content="Stackd School">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>
 (function(){
   try{
@@ -122,7 +117,8 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 #safe-bottom{position:fixed;bottom:0;left:0;right:0;height:env(safe-area-inset-bottom,0px);background:var(--bg2);z-index:99;}
 
 /* TOPBAR */
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:56px;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
+  margin-top:36px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:56px;}
 .tb-l{display:flex;align-items:center;gap:10px;min-width:0;overflow:hidden;}
 .tb-s{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2.5px;padding:7px 6px;flex-shrink:0;}
 .tb-s .bar{background:#fff;border-radius:1.5px;height:2.5px;width:65%;}
@@ -647,6 +643,9 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 /* Modern uses base tokens - no overrides needed */
 
 @media(max-width:600px){.two-col{grid-template-columns:1fr 1fr;}.stat-grid{grid-template-columns:repeat(3,1fr);}}
+/* -- DEMO BANNER -- */
+#demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#f0a500;color:#111;font-family:'Sora',sans-serif;font-size:12px;font-weight:700;text-align:center;padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:12px;}
+#demo-banner a{color:#111;text-decoration:underline;font-weight:800;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -845,6 +844,12 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
       <button onclick="wtNext()" id="wt-next-btn" style="flex:2;background:var(--accent);color:#fff;border:none;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:12px;cursor:pointer;">Next</button>
     </div>
   </div>
+</div>
+
+<!-- DEMO BANNER -->
+<div id="demo-banner">
+  ⚡ Live Demo — All Premium features unlocked. Data resets on refresh.
+  <a href="https://mystackd.com">Get the real app →</a>
 </div>
 
 <!-- SPLASH -->
@@ -1309,21 +1314,13 @@ function cancelParentChanges(){
   _navDirect('home');
 }
 function saveParentChanges(){
-  if(!STAGING)return;
-  DB.subjects=STAGING.subjects;
-  DB.tasks=STAGING.tasks;
-  DB.rewards=STAGING.rewards;
-  DB.config=STAGING.config;
-  DB.save();
+  showToast('Demo mode — changes not saved.');
   STAGING=null;
-  el('parent-save-bar').style.display='none';
-  showToast('Changes saved.');
-  applyStackTheme(DB.config.stackTheme||'minimal');
-  updateNavLabels();
-  updateKidName();
-  _navDirect('home');
+  var bar=document.getElementById('parent-save-bar');if(bar)bar.style.display='none';
+  nav('brief');
 }
-// Direct nav — skips dirty guard, used after save/discard
+
+
 function _navDirect(screen){
   var screens=['home','lessons','tasks','rewards','report','parent'];
   screens.forEach(function(s){var sc=el('s-'+s);if(sc&&sc.classList)sc.classList.remove('active');var nb=el('nb-'+s);if(nb&&nb.classList)nb.classList.remove('active');});
@@ -2219,7 +2216,7 @@ var PREMIUM = {
 // Selected plan on paywall
 var _selectedPlan = 'annual';
 
-function isPremium(){return PREMIUM.isActive();}
+function isPremium(){return true;} // Demo: always premium
 
 // ── REVENUECAT INIT ──
 async function initRevenueCat(){
