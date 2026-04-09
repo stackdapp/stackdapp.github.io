@@ -1,1 +1,501 @@
-<h1>School landing placeholder</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackd School — Make school feel like a game.</title>
+<meta name="description" content="A homeschool app with subject timers, XP, streaks, and reports. Make school feel like a game with Stackd School.">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABkElEQVR4nN2Xy04CMRSGu6fdCe+Cj2HGRBcafQV8AkXSRtiQVrwksMUN8ZJ4GVe4EBMdGYm+gSEaVwpshhBqjjITFDGdpE6JJ/lXPe3/9fQsehAailghmyCCrhNOXSxohwgmdQjOwoLVCWdp8EA/BeZ0FnPa0mU6FobTFhbMGjEnnPb/2jwQp/0AIlbIJqK4+eizsDecz8TRx5tHbD5UiTVEBLszBQCNiTBnbWMAnLaQsfIPhH5bnN4rySX7UC7bR0qC3GS5qA9g8exA2dzXwum+PoBkuWi2AsR0D5BJA5g/qcjd+7osPbhKglzYow1gu+Eom/vaajhmKzB3XPlHPUBMAKxcnMvr56Z0X56UBLmpqq0P4LL5qGzuC/ZoA0hVbbMVIKZ7gEwaQM65kl6vJ1UDcrNOTR9Ap+vJsNHueuMBcMgfMdwmbAU2bmpjf8YIpiCjn1LCWdpgE66aG0w4e8U7uanP0UwwK/LRbJPNfJ0PBbOgKSK5+XfzACKficO4hAW91TmwwFlwJrx5UPZBvANOhCIVbgZjgQAAAABJRU5ErkJggg==">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#fffaf2;--bg2:#fff4e3;--panel:#ffffff;--panel2:#fff8ee;--border:#efd9b0;
+  --txt:#241a12;--txt2:#6e5848;--txt3:#b18b66;
+  --accent:#d4860a;--accent2:#f0a500;--accent-dim:rgba(240,165,0,.10);--accent-glow:rgba(240,165,0,.22);
+  --teal:#0D9488;--teal-dim:rgba(13,148,136,.10);
+  --ink:#111827;--soft:#fff0d6;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(212,134,10,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,134,10,.04) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+body::after{
+  content:'';
+  position:fixed;top:-18%;left:50%;transform:translateX(-50%);
+  width:900px;height:560px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(240,165,0,.10) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,250,242,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-left{display:flex;align-items:center;gap:16px;}
+.nav-back{
+  font-size:12px;font-weight:700;color:var(--txt3);text-decoration:none;transition:color .15s;
+}
+.nav-back:hover{color:var(--txt2);}
+.nav-divider{width:1px;height:16px;background:var(--border);}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-mark{
+  width:28px;height:28px;background:var(--teal);border-radius:7px;
+  display:flex;flex-direction:column;justify-content:center;gap:3px;padding:6px 6px;flex-shrink:0;
+}
+.bar{background:#fff;border-radius:2px;height:3px;width:65%;}
+.bar:nth-child(2){margin-left:30%;}
+.bar:nth-child(3){margin-left:10%;}
+.bar:nth-child(4){margin-left:35%;}
+.logo-name{
+  font-family:'Sora',sans-serif;
+  font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.3px;
+}
+.logo-app{font-size:13px;font-weight:700;color:var(--accent);}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.nav-link{
+  font-size:13px;font-weight:700;color:var(--txt3);text-decoration:none;
+  padding:7px 14px;border-radius:8px;transition:all .15s;
+}
+.nav-link:hover{color:var(--txt);background:var(--accent-dim);}
+.nav-cta{
+  background:var(--accent);color:#fff !important;border-radius:10px;padding:8px 18px !important;
+}
+.nav-cta:hover{background:var(--accent2)!important;}
+
+.hero{
+  min-height:100vh;display:flex;align-items:center;padding:100px 24px 60px;position:relative;z-index:1;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent-dim);border:1px solid rgba(212,134,10,.22);
+  color:var(--accent);font-size:11px;font-weight:800;padding:6px 16px;border-radius:20px;
+  letter-spacing:.6px;text-transform:uppercase;margin-bottom:24px;
+  font-family:'Sora',sans-serif;animation:fadeUp .6s ease both;
+}
+.hero-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.hero h1{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:20px;
+  animation:fadeUp .6s .1s ease both;
+}
+.hero h1 em{
+  color:var(--accent);font-style:normal;display:block;
+}
+.hero-sub{
+  font-size:16px;color:var(--txt2);line-height:1.75;margin-bottom:32px;
+  max-width:560px;animation:fadeUp .6s .2s ease both;
+}
+.hero-btns{
+  display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .6s .3s ease both;
+}
+.btn-primary{
+  background:var(--accent);color:#fff;border:none;border-radius:12px;
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:800;
+  padding:14px 28px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;box-shadow:0 0 28px var(--accent-glow);
+}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);}
+.btn-ghost{
+  background:transparent;color:var(--txt2);border:1px solid var(--border);border-radius:12px;
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:700;
+  padding:14px 28px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
+.hero-proof{
+  display:flex;gap:20px;margin-top:28px;flex-wrap:wrap;animation:fadeUp .6s .4s ease both;
+}
+.proof-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--txt3);font-weight:600;}
+.proof-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);}
+
+.hero-visual{
+  display:flex;flex-direction:column;align-items:center;gap:20px;animation:fadeUp .7s .3s ease both;
+}
+.phone{
+  width:240px;border-radius:32px;overflow:hidden;
+  box-shadow:0 40px 80px rgba(36,26,18,.22),0 0 60px rgba(240,165,0,.08);
+  background:#fffdf8;border:1px solid var(--border);
+}
+.p-top{
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;
+  background:#fff3e0;border-bottom:1px solid var(--border);
+}
+.p-logo{
+  font-family:'Sora',sans-serif;
+  font-size:10px;font-weight:900;letter-spacing:1px;color:var(--accent);
+}
+.p-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:#9c7f61;}
+.p-body{padding:12px;display:flex;flex-direction:column;gap:8px;}
+.p-card{
+  border-radius:14px;padding:10px 12px;border:1px solid #f0dfc5;background:#fff;
+}
+.p-eyebrow{
+  font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px;color:#ad8a61;
+  font-family:'Sora',sans-serif;
+}
+.p-big{
+  font-size:16px;font-weight:900;letter-spacing:-.3px;color:var(--accent);font-family:'Sora',sans-serif;
+}
+.p-sub{font-size:9px;margin-top:2px;color:#7a6655;}
+.p-row{display:flex;gap:6px;}
+.p-mini{
+  flex:1;border-radius:10px;padding:8px 10px;border:1px solid #f0dfc5;background:#fff;
+}
+.p-val{
+  font-size:14px;font-weight:800;font-family:'JetBrains Mono',monospace;color:var(--teal);
+}
+.p-bar-wrap{border-radius:4px;height:3px;margin-top:5px;overflow:hidden;background:#f6e9d5;}
+.p-bar-fill{height:100%;border-radius:4px;width:68%;background:var(--accent);}
+.p-task{
+  display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid #f3e7d4;font-size:9px;color:#695648;
+}
+.p-task:last-child{border-bottom:none;}
+.p-check{
+  width:11px;height:11px;border-radius:3px;border:1.5px solid #d8c3a6;flex-shrink:0;
+}
+.p-check.done{background:var(--teal);border-color:var(--teal);}
+.p-nb{
+  display:flex;justify-content:space-around;padding:8px 6px 10px;background:#fff7ed;border-top:1px solid var(--border);
+}
+.p-nb-i{
+  display:flex;flex-direction:column;align-items:center;gap:2px;font-size:6px;font-weight:700;color:#b18b66;
+}
+.p-nb-i.on{color:var(--accent);}
+.themes-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
+.theme-chip{
+  padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--panel);
+  font-size:10px;font-weight:700;color:var(--txt3);cursor:pointer;transition:all .2s;font-family:'Sora',sans-serif;
+}
+.theme-chip:hover{border-color:var(--accent);color:var(--accent);}
+.theme-chip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+.section{padding:90px 0;}
+.section-tag{
+  font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;
+  font-family:'Sora',sans-serif;
+}
+.section h2{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-1px;line-height:1.15;margin-bottom:14px;
+}
+.section h2 span{color:var(--accent);}
+.section .lead{font-size:15px;color:var(--txt2);line-height:1.75;max-width:560px;}
+
+.feature-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:44px;
+}
+.feature-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:all .2s;
+}
+.feature-card::before{
+  content:'';position:absolute;inset:0;border-radius:18px;background:radial-gradient(circle at 0% 0%,var(--accent-dim),transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.feature-card:hover{border-color:rgba(212,134,10,.28);transform:translateY(-2px);}
+.feature-card:hover::before{opacity:1;}
+.feature-icon{font-size:28px;margin-bottom:14px;}
+.feature-card h3{
+  font-family:'Sora',sans-serif;
+  font-size:16px;font-weight:700;margin-bottom:7px;letter-spacing:-.2px;
+}
+.feature-card p{font-size:13px;color:var(--txt2);line-height:1.7;}
+
+.quote-section{padding:70px 0;}
+.quote-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:22px;padding:44px;text-align:center;position:relative;overflow:hidden;
+}
+.quote-card::before{
+  content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,var(--accent-dim),transparent 60%);
+}
+.quote-text{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(17px,2.5vw,24px);font-weight:700;line-height:1.5;letter-spacing:-.3px;position:relative;z-index:1;
+}
+.quote-text em{color:var(--accent);font-style:normal;}
+.quote-author{margin-top:18px;font-size:13px;color:var(--txt3);position:relative;z-index:1;}
+
+.compare{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:42px;
+}
+.compare-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;
+}
+.compare-card h3{
+  font-family:'Sora',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:10px;
+}
+.compare-card p{font-size:13px;color:var(--txt2);line-height:1.7;}
+.compare-label{
+  display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;
+  padding:5px 10px;border-radius:20px;margin-bottom:14px;font-family:'Sora',sans-serif;
+}
+.compare-day .compare-label{background:var(--teal-dim);color:var(--teal);}
+.compare-school .compare-label{background:var(--accent-dim);color:var(--accent);}
+
+.cta-section{padding:90px 0;text-align:center;}
+.cta-title{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(32px,5vw,60px);font-weight:900;letter-spacing:-2px;line-height:1.1;margin-bottom:16px;
+}
+.cta-title span{color:var(--accent);}
+.cta-sub{font-size:15px;color:var(--txt2);margin-bottom:36px;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;position:relative;z-index:1;}
+footer p{font-size:12px;color:var(--txt3);}
+footer a{color:var(--accent);text-decoration:none;}
+.footer-links{display:flex;gap:20px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:var(--txt3);text-decoration:none;transition:color .15s;}
+.footer-links a:hover{color:var(--accent);}
+
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center;}
+  .hero-tag{margin:0 auto 24px;}
+  .hero-btns{justify-content:center;}
+  .hero-proof{justify-content:center;}
+  .compare{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .nav-right .nav-link:not(.nav-cta){display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-back">← All apps</a>
+    <div class="nav-divider"></div>
+    <a class="nav-logo" href="/school-landing">
+      <div class="logo-mark"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+      <div class="logo-name">stackd <span class="logo-app">School</span></div>
+    </a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-link" href="/guide">Guide</a>
+    <a class="nav-link nav-cta" href="/school">Try Demo</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag"><span></span>Built for homeschool families</div>
+      <h1>School time feels better<em>when it feels like progress.</em></h1>
+      <p class="hero-sub">Subject timers, lesson XP, streaks, and a report card that make homeschool feel structured without feeling heavy. Built for families who want school time to feel more rewarding and less like a fight.</p>
+      <div class="hero-btns">
+        <a href="/school" class="btn-primary">Try the demo →</a>
+        <a href="/guide" class="btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item"><div class="proof-dot"></div>Free to start</div>
+        <div class="proof-item"><div class="proof-dot"></div>No account needed</div>
+        <div class="proof-item"><div class="proof-dot"></div>Works offline</div>
+        <div class="proof-item"><div class="proof-dot"></div>14-day free trial on Pro</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone" id="mockup-phone">
+        <div class="p-top">
+          <div class="p-logo" id="m-logo">STACKD SCHOOL</div>
+          <div class="p-time">9:15 AM</div>
+        </div>
+        <div class="p-body">
+          <div class="p-card">
+            <div class="p-eyebrow" id="m-eyebrow">School session active</div>
+            <div class="p-big" id="m-big">Math</div>
+            <div class="p-sub" id="m-sub">18:42 remaining · +50 XP</div>
+            <div class="p-bar-wrap"><div class="p-bar-fill"></div></div>
+          </div>
+          <div class="p-row">
+            <div class="p-mini">
+              <div class="p-eyebrow">School XP</div>
+              <div class="p-val">120</div>
+            </div>
+            <div class="p-mini">
+              <div class="p-eyebrow">Subjects</div>
+              <div class="p-val">2/5</div>
+            </div>
+          </div>
+          <div class="p-card">
+            <div class="p-task"><div class="p-check done"></div>Reading</div>
+            <div class="p-task"><div class="p-check done"></div>Writing</div>
+            <div class="p-task"><div class="p-check"></div>Science</div>
+          </div>
+        </div>
+        <div class="p-nb">
+          <div class="p-nb-i">🏠<span>Home</span></div>
+          <div class="p-nb-i on">📚<span>School</span></div>
+          <div class="p-nb-i">⭐<span>Rewards</span></div>
+          <div class="p-nb-i">📊<span>Report</span></div>
+        </div>
+      </div>
+
+      <div class="themes-row">
+        <div class="theme-chip on" onclick="setPreview('math',this)">Math</div>
+        <div class="theme-chip" onclick="setPreview('reading',this)">Reading</div>
+        <div class="theme-chip" onclick="setPreview('science',this)">Science</div>
+        <div class="theme-chip" onclick="setPreview('break',this)">Break</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-tag">Why it works</div>
+    <h2>Structure for school that <span>still feels flexible.</span></h2>
+    <p class="lead">Stackd School helps families turn school into clear, winnable steps. Kids see what they’re doing, how long it lasts, and what they earn for finishing.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⏱</div>
+        <h3>Subject timers</h3>
+        <p>Each subject gets its own session timer, so kids know what they’re doing right now and how much longer it lasts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>XP that makes progress visible</h3>
+        <p>Every finished subject and task earns XP. Progress feels concrete instead of vague.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Built for real homeschool flow</h3>
+        <p>Add subjects, set durations, reorder the day, and keep the structure light instead of rigid.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏸</div>
+        <h3>Breaks between sessions</h3>
+        <p>Built-in break timing helps school feel more manageable, especially for kids who need resets between subjects.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Report card and streaks</h3>
+        <p>See time spent, subjects finished, XP earned, and how consistent the routine is becoming over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Parent setup stays protected</h3>
+        <p>Use a PIN to keep parent settings separate so kids can use the app without changing the setup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <div class="wrap">
+    <div class="quote-card">
+      <div class="quote-text">“Less arguing. More momentum. <em>That’s the goal.</em>”</div>
+      <div class="quote-author">What Stackd School is built to support.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-tag">Which app fits?</div>
+    <h2>Use School for learning blocks.<br><span>Use Day for everything else.</span></h2>
+    <p class="lead">They work well together, but they solve different problems.</p>
+
+    <div class="compare">
+      <div class="compare-card compare-school">
+        <div class="compare-label">Stackd School</div>
+        <h3>Best for homeschool time</h3>
+        <p>Use it when you want subject timers, school XP, session flow, break timing, and a report card for learning days.</p>
+      </div>
+      <div class="compare-card compare-day">
+        <div class="compare-label">Stackd Day</div>
+        <h3>Best for daily routines</h3>
+        <p>Use it when you want morning, afternoon, evening, chores, transitions, rewards, and the rest of the day in one place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-title">Make school feel<br><span>worth finishing.</span></div>
+    <p class="cta-sub">Free to start. No account needed. Built to make progress visible.</p>
+    <div class="cta-btns">
+      <a href="/school" class="btn-primary">Try the demo →</a>
+      <a href="/guide" class="btn-ghost">Quick start guide</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="/">All apps</a>
+      <a href="/day">Stackd Day</a>
+      <a href="/guide">Guide</a>
+      <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener">Support ☕</a>
+    </div>
+    <p>Stackd Apps · mystackd.com · Built for kids who think differently.</p>
+  </div>
+</footer>
+
+<script>
+var previews = {
+  math:{
+    eyebrow:'School session active',
+    big:'Math',
+    sub:'18:42 remaining · +50 XP'
+  },
+  reading:{
+    eyebrow:'Next up',
+    big:'Reading',
+    sub:'15:00 session · +40 XP'
+  },
+  science:{
+    eyebrow:'Current subject',
+    big:'Science',
+    sub:'20:00 session · +50 XP'
+  },
+  break:{
+    eyebrow:'Between subjects',
+    big:'Break Time',
+    sub:'10:00 reset timer'
+  }
+};
+
+function setPreview(key, el){
+  var d = previews[key];
+  document.getElementById('m-eyebrow').textContent = d.eyebrow;
+  document.getElementById('m-big').textContent = d.big;
+  document.getElementById('m-sub').textContent = d.sub;
+  document.querySelectorAll('.theme-chip').forEach(function(c){ c.classList.remove('on'); });
+  el.classList.add('on');
+}
+</script>
+
+</body>
+</html>
