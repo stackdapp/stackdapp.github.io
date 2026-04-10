@@ -1,1 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackd School — Quick Start Guide</title>
+<meta name="description" content="Get started with Stackd School — the homeschool timer app for families and co-ops.">
 
+<!-- PERF: preconnect reduces font load latency -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+/* ─── RESET ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── TOKENS — School theme (teal/dark) ─────────── */
+:root {
+  --bg:       #07100e;
+  --bg2:      #0c1a16;
+  --panel:    #112018;
+  --border:   #1a3028;
+  --txt:      #e8f5f2;
+  --txt2:     #7ab8ae;
+  --txt3:     #3d7a70;
+  --accent:   #0D9488;   /* teal */
+  --accent2:  #14b8a6;
+  --premium:  #D97706;   /* amber for Pro callout */
+  --touch-min: 44px;
+}
+
+/* ─── BASE ─────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Sora', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── SKIP LINK (A11Y) ───────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--accent2);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top .15s;
+}
+.skip-link:focus { top: 0; }
+
+/* A11Y: visible focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 3px;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────── */
+.wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+/* ─── NAV ─────────────────────────────────────── */
+nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: var(--touch-min);
+}
+
+.nav-logo {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--txt);
+  letter-spacing: -.4px;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-link {
+  font-size: 13px;
+  color: var(--txt3);
+  text-decoration: none;
+  font-weight: 600;
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  transition: color .15s;
+}
+.nav-link:hover { color: var(--txt); }
+
+/* Cross-link to Day guide */
+.nav-link.sibling {
+  color: var(--accent2);
+  border: 1px solid rgba(13,148,136,.25);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(13,148,136,.06);
+}
+.nav-link.sibling:hover {
+  background: rgba(13,148,136,.12);
+  color: var(--txt);
+}
+
+/* ─── HERO ─────────────────────────────────────── */
+.hero {
+  padding: 60px 20px 36px;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(13,148,136,.12);
+  color: var(--accent2);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 800;
+  letter-spacing: -.8px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.hero h1 span { color: var(--accent); }
+.hero p {
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ─── SECTIONS ─────────────────────────────────── */
+.section {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.section:first-child { border-top: none; padding-top: 28px; }
+
+.section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-bottom: 8px;
+}
+.section h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  margin-bottom: 10px;
+}
+.section > p {
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.7;
+}
+
+/* ─── STEPS ─────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 18px; margin-top: 22px; }
+.step { display: flex; gap: 16px; align-items: flex-start; }
+.step-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-num.pro { background: var(--premium); }
+
+.step-body h3 { font-size: 15px; font-weight: 700; color: var(--txt); margin-bottom: 4px; }
+.step-body p { font-size: 14px; color: var(--txt2); line-height: 1.6; margin: 0; }
+
+.tip {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--txt3);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+.tip strong { color: var(--txt2); }
+
+/* ─── KID GRID ─────────────────────────────────── */
+.kid-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+.kid-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+.kid-card-icon { font-size: 24px; margin-bottom: 8px; line-height: 1; }
+.kid-card h3 { font-size: 14px; font-weight: 700; color: var(--txt); margin-bottom: 4px; }
+.kid-card p { font-size: 13px; color: var(--txt2); line-height: 1.5; }
+
+/* ─── PRO SECTION ──────────────────────────────── */
+.pro-section {
+  padding: 40px 0;
+  border-top: 2px solid var(--premium);
+}
+.pro-section .section-tag { color: var(--premium); }
+
+.pro-banner {
+  background: rgba(217,119,6,.08);
+  border: 1px solid rgba(217,119,6,.25);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.pro-banner-icon { font-size: 24px; flex-shrink: 0; line-height: 1; }
+.pro-banner h3 { font-size: 15px; font-weight: 700; color: var(--txt); margin-bottom: 4px; }
+.pro-banner p { font-size: 13px; color: var(--txt2); line-height: 1.5; margin: 0; }
+
+.pro-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+.pro-feature {
+  background: var(--panel);
+  border: 1px solid rgba(217,119,6,.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.pro-feature-icon { font-size: 20px; margin-bottom: 6px; line-height: 1; }
+.pro-feature h3 { font-size: 13px; font-weight: 700; color: var(--txt); margin-bottom: 3px; }
+.pro-feature p { font-size: 12px; color: var(--txt2); line-height: 1.5; }
+
+/* ─── FAQ ─────────────────────────────────────── */
+.faq { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+.faq-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.faq-q { font-size: 14px; font-weight: 700; color: var(--txt); margin-bottom: 6px; }
+.faq-a { font-size: 13px; color: var(--txt2); line-height: 1.6; }
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 20px;
+  text-align: center;
+  margin-top: 8px;
+}
+footer p { font-size: 13px; color: var(--txt3); }
+footer a { color: var(--accent); text-decoration: none; }
+
+.bmc-btn {
+  background: #FFDD00;
+  color: #000;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  transition: opacity .15s;
+}
+.bmc-btn:hover { opacity: .85; }
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 26px; letter-spacing: -.4px; }
+  .kid-grid { grid-template-columns: 1fr; }
+  .pro-features { grid-template-columns: 1fr; }
+  .nav-link.sibling .sibling-label { display: none; }
+}
+
+/* A11Y: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <a href="https://mystackd.com" class="nav-logo" aria-label="Stackd Apps home">
+    stack<span>d</span> <span style="font-weight:400;font-size:13px;color:var(--txt3);margin-left:6px;">school</span>
+  </a>
+  <div class="nav-right">
+    <a href="https://mystackd.com" class="nav-link">← Back to site</a>
+  </div>
+</nav>
+
+<header class="hero" aria-labelledby="hero-heading">
+  <div class="hero-tag" aria-hidden="true">Quick Start Guide</div>
+  <h1 id="hero-heading">Get started with <span>Stackd School</span></h1>
+  <p>Run homeschool sessions with subject timers. Kids earn XP by completing each subject and finishing daily habits.</p>
+</header>
+
+<main id="main-content">
+<div class="wrap">
+
+  <!-- WHAT IT DOES -->
+  <section class="section" aria-labelledby="what-heading">
+    <div class="section-tag" aria-hidden="true">What it does</div>
+    <h2 id="what-heading">Stackd School</h2>
+    <p>A homeschool session tracker. Parents set up subjects and time goals. Kids start a session, work through each subject with a countdown timer, and earn XP for finishing.</p>
+  </section>
+
+  <!-- PARENT SETUP -->
+  <section class="section" aria-labelledby="setup-heading">
+    <div class="section-tag" aria-hidden="true">Parent setup</div>
+    <h2 id="setup-heading">Set it up before handing it over</h2>
+    <p>Tap <strong style="color:var(--txt);">Parent</strong> in the top-right corner to get started.</p>
+
+    <ol class="steps" aria-label="Setup steps">
+      <li class="step">
+        <div class="step-num" aria-hidden="true">1</div>
+        <div class="step-body">
+          <h3>Set your kid's name</h3>
+          <p>Parent → Settings. Their name shows in greetings throughout the app.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num" aria-hidden="true">2</div>
+        <div class="step-body">
+          <h3>Add subjects</h3>
+          <p>Parent → Subjects. Add what your kid studies — Math, Reading, Science, etc. Set a session length and XP value for each. Free plan supports up to 3 subjects.</p>
+          <div class="tip" role="note"><strong>Tip:</strong> 15–20 minutes per subject is plenty for most kids. Shorter sessions = more wins.</div>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num" aria-hidden="true">3</div>
+        <div class="step-body">
+          <h3>Add daily tasks (optional)</h3>
+          <p>Parent → Tasks. Add school habits like "Read independently" or "Review flashcards". These earn bonus XP. Free plan supports up to 3 tasks.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-num" aria-hidden="true">4</div>
+        <div class="step-body">
+          <h3>Save your changes</h3>
+          <p>Tap <strong>Save Changes</strong> at the top of the parent area. Nothing saves until you do.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- HOW KIDS USE IT -->
+  <section class="section" aria-labelledby="kids-heading">
+    <div class="section-tag" aria-hidden="true">How kids use it</div>
+    <h2 id="kids-heading">Walk through day one together</h2>
+    <p>Simple flow: start a session, work through each subject, earn XP when done.</p>
+
+    <ul class="kid-grid" role="list">
+      <li class="kid-card">
+        <div class="kid-card-icon" aria-hidden="true">🏠</div>
+        <h3>Home</h3>
+        <p>XP today, current level, streak, and a summary of today's subjects.</p>
+      </li>
+      <li class="kid-card">
+        <div class="kid-card-icon" aria-hidden="true">⏱</div>
+        <h3>School tab</h3>
+        <p>Tap Start Session. Each subject gets a countdown timer. A warning shows when time is almost up.</p>
+      </li>
+      <li class="kid-card">
+        <div class="kid-card-icon" aria-hidden="true">✅</div>
+        <h3>Tasks tab</h3>
+        <p>Check off daily school habits for bonus XP on top of session earnings.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- PRO -->
+  <section class="pro-section" aria-labelledby="pro-heading">
+    <div class="section-tag" aria-hidden="true">With Pro</div>
+    <h2 id="pro-heading">Unlock the full experience</h2>
+
+    <div class="pro-banner" role="note">
+      <div class="pro-banner-icon" aria-hidden="true">⭐</div>
+      <div>
+        <h3>Stackd School Pro — $7.99/month or $59.99/year</h3>
+        <p>14-day free trial. Cancel anytime through Google Play.</p>
+      </div>
+    </div>
+
+    <ul class="pro-features" role="list">
+      <li class="pro-feature">
+        <div class="pro-feature-icon" aria-hidden="true">🔒</div>
+        <h3>Parent PIN</h3>
+        <p>Lock the parent area so kids can't change their own subjects or settings.</p>
+      </li>
+      <li class="pro-feature">
+        <div class="pro-feature-icon" aria-hidden="true">∞</div>
+        <h3>Unlimited subjects and tasks</h3>
+        <p>No cap on how many subjects or tasks you can add.</p>
+      </li>
+      <li class="pro-feature">
+        <div class="pro-feature-icon" aria-hidden="true">📊</div>
+        <h3>Report card</h3>
+        <p>Tracks subjects completed, time spent, and XP earned over time.</p>
+      </li>
+      <li class="pro-feature">
+        <div class="pro-feature-icon" aria-hidden="true">⏸</div>
+        <h3>Break timer</h3>
+        <p>Built-in break timer between subjects to keep kids regulated.</p>
+      </li>
+      <li class="pro-feature">
+        <div class="pro-feature-icon" aria-hidden="true">🎨</div>
+        <h3>All 5 themes</h3>
+        <p>Special Ops, Superhero, Enchanted, Sprout, and Modern.</p>
+      </li>
+      <li class="pro-feature">
+        <div class="pro-feature-icon" aria-hidden="true">🔥</div>
+        <h3>Streaks</h3>
+        <p>Daily streak tracking to keep the momentum going.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="section-tag" aria-hidden="true">Common questions</div>
+    <h2 id="faq-heading">Stackd School FAQ</h2>
+
+    <!-- A11Y: dl/dt/dd for semantic Q&A -->
+    <dl class="faq">
+      <div class="faq-item">
+        <dt class="faq-q">What happens when the timer runs out?</dt>
+        <dd class="faq-a">A warning shows at 2 minutes remaining. When it hits zero the subject ends, but kids can still mark it complete and earn XP. The timer is a guide, not a hard cutoff.</dd>
+      </div>
+      <div class="faq-item">
+        <dt class="faq-q">Can subjects be done in any order?</dt>
+        <dd class="faq-a">Yes. Subjects are listed in the order you added them, but your kid can tap any subject to start it. No forced order.</dd>
+      </div>
+      <div class="faq-item">
+        <dt class="faq-q">Does it work offline?</dt>
+        <dd class="faq-a">Yes. Once installed, Stackd School works fully offline. All data stays on the device.</dd>
+      </div>
+      <div class="faq-item">
+        <dt class="faq-q">Will I lose data if I uninstall?</dt>
+        <dd class="faq-a">Yes. Before uninstalling, go to Parent → Settings → Download Backup. You can restore it after reinstalling from the same screen.</dd>
+      </div>
+      <div class="faq-item">
+        <dt class="faq-q">Can I use both Stackd Day and Stackd School?</dt>
+        <dd class="faq-a">Yes — they're separate apps that work great together. Use Day for the daily routine and School for homeschool sessions.</dd>
+      </div>
+      <div class="faq-item">
+        <dt class="faq-q">Can I cancel Pro anytime?</dt>
+        <dd class="faq-a">Yes. Cancel through your Google Play account anytime. You keep Pro access until the end of your billing period.</dd>
+      </div>
+    </dl>
+  </section>
+
+</div><!-- /wrap -->
+</main>
+
+<footer>
+  <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener noreferrer"
+    class="bmc-btn" aria-label="Support Stackd on Buy Me a Coffee (opens in new tab)">
+    ☕ Buy me a coffee →
+  </a>
+  <p>Built with love for kids who think differently. &nbsp;·&nbsp; <a href="https://mystackd.com">mystackd.com</a></p>
+</footer>
+
+</body>
+</html>
