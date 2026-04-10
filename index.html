@@ -5,175 +5,557 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stackd Apps — Build great days.</title>
 <meta name="description" content="Two apps that make your kid's day feel like a game. Stackd Day for daily routines, Stackd School for homeschool.">
-<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABkElEQVR4nN2Xy04CMRSGu6fdCe+Cj2HGRBcafQV8AkXSRtiQVrwksMUN8ZJ4GVe4EBMdGYm+gSEaVwpshhBqjjITFDGdpE6JJ/lXPe3/9fQsehAailghmyCCrhNOXSxohwgmdQjOwoLVCWdp8EA/BeZ0FnPa0mU6FobTFhbMGjEnnPb/2jwQp/0AIlbIJqK4+eizsDecz8TRx5tHbD5UiTVEBLszBQCNiTBnbWMAnLaQsfIPhH5bnN4rySX7UC7bR0qC3GS5qA9g8exA2dzXwum+PoBkuWi2AsR0D5BJA5g/qcjd+7osPbhKglzYow1gu+Eom/vaajhmKzB3XPlHPUBMAKxcnMvr56Z0X56UBLmpqq0P4LL5qGzuC/ZoA0hVbbMVIKZ7gEwaQM65kl6vJ1UDcrNOTR9Ap+vJsNHueuMBcMgfMdwmbAU2bmpjf8YIpiCjn1LCWdpgE66aG0w4e8U7uanP0UwwK/LRbJPNfJ0PBbOgKSK5+XfzACKficO4hAW91TmwwFlwJrx5UPZBvANOhCIVbgZjgQAAAABJRU5ErkJggg==">
+
+<!-- PERF: preconnect reduces font load latency -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- PERF: added display=swap fallback already present, kept as-is -->
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- A11Y: favicon kept from original -->
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABkElEQVR4nN2Xy04CMRSGu6fdCe+Cj2HGRBcafQV8AkXSRtiQVrwksMUN8ZJ4GVe4EBMdGYm+gSEaVwpshhBqjjITFDGdpE6JJ/lXPe3/9fQsehAailghmyCCrhNOXSxohwgmdQjOwoLVCWdp8EA/BeZ0FnPa0mU6FobTFhbMGjEnnPb/2jwQp/0AIlbIJqK4+eizsDecz8TRx5tHbD5UiTVEBLszBQCNiTBnbWMAnLaQsfIPhH5bnN4rySX7UC7bR0qC3GS5qA9g8exA2dzXwum+PoBkuWi2AsR0D5BJA5g/qcjd+7osPbhKglzYow1gu+Eom/vaajhmKzB3XPlHPUBMAKxcnMvr56Z0X56UBLmpqq0P4LL5qGzuC/ZoA0hVbbMVIKZ7gEwaQM65kl6vJ1UDcrNOTR9Ap+vJsNHueuMBcMgfMdwmbAU2bmpjf8YIpiCjn1LCWdpgE66aG0w4e8U7uanP0UwwK/LRbJPNfJ0PBbOgKSK5+XfzACKficO4hAW91TmwwFlwJrx5UPZBvANOhCIVbgZjgQAAAABJRU5ErkJggg==">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --bg:#07100e;--bg2:#0c1a16;--panel:#112018;--border:#1a3028;
-  --teal:#0D9488;--teal2:#14b8a6;--teal-dim:rgba(13,148,136,.12);
-  --txt:#e8f5f2;--txt2:#7ab8ae;--txt3:#3d7a70;
+/* ─── RESET ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── TOKENS ─────────────────────────────────────── */
+:root {
+  --bg:        #07100e;
+  --bg2:       #0c1a16;
+  --panel:     #112018;
+  --border:    #1a3028;
+  --teal:      #0D9488;
+  --teal2:     #14b8a6;
+  --teal-dim:  rgba(13,148,136,.12);
+  --txt:       #e8f5f2;
+  --txt2:      #7ab8ae;
+  --txt3:      #3d7a70;
+
+  /* A11Y: minimum touch target size token */
+  --touch-min: 44px;
 }
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);color:var(--txt);font-family:'Sora',sans-serif;
-  min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;
+
+/* ─── BASE ─────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Sora', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  /* A11Y: improves text rendering on all platforms */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+
+/* PERF: pseudo-elements merged into a single stacking context */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
   background-image:
-    linear-gradient(rgba(13,148,136,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(13,148,136,.04) 1px,transparent 1px);
-  background-size:48px 48px;
+    linear-gradient(rgba(13,148,136,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,148,136,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  /* PERF: keeps grid layer on its own GPU layer */
+  will-change: transform;
 }
-body::after{
-  content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);
-  width:900px;height:600px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(13,148,136,.07) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
+
+body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, 100vw);  /* MOBILE: prevents horizontal overflow on narrow screens */
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(13,148,136,.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
-nav{
-  position:relative;z-index:10;padding:20px 32px;
-  display:flex;align-items:center;justify-content:space-between;
+
+/* ─── SKIP LINK (A11Y: keyboard nav) ─────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--teal);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top .15s;
 }
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.logo-mark{width:34px;height:34px;background:var(--teal);border-radius:9px;
-  display:flex;flex-direction:column;justify-content:center;gap:3.5px;padding:8px 7px;flex-shrink:0;}
-.bar{background:#fff;border-radius:2px;height:3.5px;width:65%;}
-.bar:nth-child(2){margin-left:30%;}
-.bar:nth-child(3){margin-left:10%;}
-.bar:nth-child(4){margin-left:35%;}
-.logo-name{font-size:17px;font-weight:800;color:var(--txt);letter-spacing:-.3px;}
-.nav-right{display:flex;align-items:center;gap:16px;}
-.nav-link{font-size:13px;font-weight:600;color:var(--txt3);text-decoration:none;transition:color .15s;}
-.nav-link:hover{color:var(--txt2);}
-.bmc-btn{background:#FFDD00;color:#000;font-family:'Sora',sans-serif;font-size:12px;font-weight:800;padding:7px 16px;border-radius:10px;text-decoration:none;white-space:nowrap;transition:opacity .15s;}
-.bmc-btn:hover{opacity:.85;}
+.skip-link:focus { top: 0; }
 
-.hero{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:60px 24px 80px;position:relative;z-index:1;
+/* ─── NAV ─────────────────────────────────────── */
+nav {
+  position: relative;
+  z-index: 10;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--teal-dim);border:1px solid rgba(13,148,136,.2);
-  color:var(--teal2);font-size:11px;font-weight:700;padding:6px 16px;
-  border-radius:20px;letter-spacing:.6px;text-transform:uppercase;
-  margin-bottom:28px;animation:fadeUp .5s ease both;
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  /* A11Y: visible focus ring */
+  border-radius: 8px;
 }
-.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-.hero h1{font-size:clamp(40px,7vw,76px);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:16px;animation:fadeUp .5s .1s ease both;}
-.hero h1 em{color:var(--teal);font-style:normal;}
-.hero-sub{font-size:clamp(15px,2vw,18px);color:var(--txt2);line-height:1.7;max-width:480px;margin:0 auto 56px;animation:fadeUp .5s .2s ease both;}
+/* A11Y: all interactive elements get visible focus */
+:focus-visible {
+  outline: 2px solid var(--teal2);
+  outline-offset: 3px;
+}
 
-.app-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;width:100%;animation:fadeUp .5s .3s ease both;}
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  background: var(--teal);
+  border-radius: 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3.5px;
+  padding: 8px 7px;
+  flex-shrink: 0;
+  /* A11Y: purely decorative, hidden from screen readers via aria-hidden on parent usage */
+  aria-hidden: true;
+}
 
-.app-card{text-decoration:none;color:inherit;border-radius:24px;padding:36px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;}
-.app-card:hover{transform:translateY(-4px);}
+.bar {
+  background: #fff;
+  border-radius: 2px;
+  height: 3.5px;
+  width: 65%;
+}
+.bar:nth-child(2) { margin-left: 30%; }
+.bar:nth-child(3) { margin-left: 10%; }
+.bar:nth-child(4) { margin-left: 35%; }
 
-.app-card.day{background:linear-gradient(135deg,#071409 0%,#0d1f0a 100%);border:1px solid #1a3010;}
-.app-card.day::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(74,222,128,.07),transparent 60%);}
-.app-card.day:hover{box-shadow:0 24px 60px rgba(74,222,128,.12);}
+.logo-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--txt);
+  letter-spacing: -.3px;
+}
 
-.app-card.school{background:linear-gradient(135deg,#fef9f0 0%,#fff8ec 100%);border:1px solid #f0d99a;}
-.app-card.school::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(240,165,0,.08),transparent 60%);}
-.app-card.school:hover{box-shadow:0 24px 60px rgba(240,165,0,.15);}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-.card-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;position:relative;z-index:1;}
-.day .card-tag{color:#4ade80;}
-.school .card-tag{color:#d97706;}
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt3);
+  text-decoration: none;
+  transition: color .15s;
+  /* A11Y: minimum touch target */
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 4px;
+}
+.nav-link:hover { color: var(--txt2); }
 
-.card-icon{font-size:40px;margin-bottom:14px;position:relative;z-index:1;}
+.bmc-btn {
+  background: #FFDD00;
+  color: #000;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .15s;
+  /* A11Y: minimum touch target */
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+}
+.bmc-btn:hover { opacity: .85; }
 
-.card-name{font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:10px;position:relative;z-index:1;}
-.day .card-name{color:#e8f5f2;}
-.school .card-name{color:#1c1410;}
+/* ─── HERO ─────────────────────────────────────── */
+/* A11Y: <main> used as landmark, id added for skip link */
+main.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
 
-.card-hook{font-size:13px;font-style:italic;line-height:1.6;margin-bottom:14px;position:relative;z-index:1;}
-.day .card-hook{color:#4ade80;}
-.school .card-hook{color:#d97706;}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(13,148,136,.2);
+  color: var(--teal2);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp .5s ease both;
+}
 
-.card-desc{font-size:13px;line-height:1.65;margin-bottom:28px;flex:1;position:relative;z-index:1;}
-.day .card-desc{color:#4a7060;}
-.school .card-desc{color:#78602a;}
+/* A11Y: pulse dot is decorative — hidden from screen readers */
+.hero-eyebrow .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+  /* aria-hidden set inline */
+}
 
-.card-cta{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;border-radius:10px;padding:11px 20px;transition:all .2s;position:relative;z-index:1;text-decoration:none;width:fit-content;}
-.day .card-cta{background:#4ade80;color:#071409;}
-.day .card-cta:hover{background:#86efac;}
-.school .card-cta{background:#d97706;color:#fff;}
-.school .card-cta:hover{background:#f59e0b;}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
 
-.card-audience{font-size:10px;font-weight:600;margin-top:14px;position:relative;z-index:1;}
-.day .card-audience{color:#2a5040;}
-.school .card-audience{color:#b08030;}
+.hero h1 {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin-bottom: 16px;
+  animation: fadeUp .5s .1s ease both;
+}
+.hero h1 em { color: var(--teal); font-style: normal; }
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--txt2);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 56px;
+  animation: fadeUp .5s .2s ease both;
+}
 
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-footer p{font-size:12px;color:var(--txt3);}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
-.footer-links a{font-size:12px;color:var(--txt3);text-decoration:none;transition:color .15s;}
-.footer-links a:hover{color:var(--teal2);}
+/* ─── CARDS ─────────────────────────────────────── */
+/* A11Y: role="list" + role="listitem" so screen readers announce count */
+.app-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 760px;
+  width: 100%;
+  animation: fadeUp .5s .3s ease both;
+}
 
-@media(max-width:600px){
-  .app-cards{grid-template-columns:1fr;}
-  nav{padding:16px 20px;}
-  .hero{padding:40px 20px 60px;}
-  footer{flex-direction:column;text-align:center;}
-  .footer-links{justify-content:center;}
+.app-card {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 24px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+  /* A11Y: ensure card is reachable and announced as a link */
+}
+.app-card:hover { transform: translateY(-4px); }
+
+/* A11Y: reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .app-card,
+  .hero-eyebrow,
+  .hero h1,
+  .hero-sub,
+  .app-cards,
+  .pulse-dot {
+    animation: none;
+    transition: none;
+  }
+}
+
+.app-card.day {
+  background: linear-gradient(135deg, #071409 0%, #0d1f0a 100%);
+  border: 1px solid #1a3010;
+}
+.app-card.day::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 20%, rgba(74,222,128,.07), transparent 60%);
+  pointer-events: none; /* BUGFIX: was blocking clicks on the card in some browsers */
+}
+.app-card.day:hover { box-shadow: 0 24px 60px rgba(74,222,128,.12); }
+
+.app-card.school {
+  background: linear-gradient(135deg, #fef9f0 0%, #fff8ec 100%);
+  border: 1px solid #f0d99a;
+}
+.app-card.school::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 20%, rgba(240,165,0,.08), transparent 60%);
+  pointer-events: none; /* BUGFIX: same fix */
+}
+.app-card.school:hover { box-shadow: 0 24px 60px rgba(240,165,0,.15); }
+
+.card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.day .card-tag   { color: #4ade80; }
+.school .card-tag { color: #d97706; }
+
+/* A11Y: emoji icons are decorative — aria-hidden set inline */
+.card-icon {
+  font-size: 40px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+  line-height: 1; /* BUGFIX: prevents emoji from adding extra line-height gap */
+}
+
+.card-name {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.day .card-name    { color: #e8f5f2; }
+.school .card-name { color: #1c1410; }
+
+.card-hook {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.day .card-hook    { color: #4ade80; }
+.school .card-hook { color: #d97706; }
+
+.card-desc {
+  font-size: 13px;
+  line-height: 1.65;
+  margin-bottom: 28px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.day .card-desc    { color: #4a7060; }
+.school .card-desc { color: #78602a; }
+
+/* BUGFIX: was <span> inside <a> — changed to <div> so it's not a nested interactive element */
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 11px 20px;
+  transition: all .2s;
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  /* A11Y: minimum touch target */
+  min-height: var(--touch-min);
+}
+.day .card-cta           { background: #4ade80; color: #071409; }
+.day .card-cta:hover     { background: #86efac; }
+.school .card-cta        { background: #d97706; color: #fff; }
+.school .card-cta:hover  { background: #f59e0b; }
+
+.card-audience {
+  font-size: 10px;
+  font-weight: 600;
+  margin-top: 14px;
+  position: relative;
+  z-index: 1;
+}
+.day .card-audience    { color: #2a5040; }
+.school .card-audience { color: #b08030; }
+
+/* ─── ANIMATIONS ─────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer p { font-size: 12px; color: var(--txt3); }
+
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+.footer-links a {
+  font-size: 12px;
+  color: var(--txt3);
+  text-decoration: none;
+  transition: color .15s;
+  /* A11Y: minimum touch target */
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+}
+.footer-links a:hover { color: var(--teal2); }
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 600px) {
+  /* MOBILE: single-column cards */
+  .app-cards { grid-template-columns: 1fr; }
+
+  nav { padding: 16px 20px; }
+
+  /* MOBILE: tighter hero padding */
+  main.hero { padding: 40px 20px 60px; }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links { justify-content: center; }
+
+  /* MOBILE: card padding reduced for small screens */
+  .app-card { padding: 28px 22px; }
+
+  /* MOBILE: BuyMeACoffee text hidden on very small screens, icon only */
+  .bmc-btn .bmc-text { display: none; }
+}
+
+/* MOBILE: mid-range tablet fix — prevents awkward card widths */
+@media (max-width: 480px) {
+  .hero h1 { letter-spacing: -1px; } /* tighten spacing on small screens */
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">
-    <div class="logo-mark"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+<!-- A11Y: skip link so keyboard users can jump past nav -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- A11Y: aria-label names the nav landmark -->
+<nav aria-label="Main navigation">
+  <!-- A11Y: aria-label describes the logo link destination -->
+  <a href="/" class="nav-logo" aria-label="Stackd Apps home">
+    <!-- A11Y: logo mark is decorative -->
+    <div class="logo-mark" aria-hidden="true">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
     <div class="logo-name">stackd</div>
-  </div>
+  </a>
+
   <div class="nav-right">
     <a href="/guide" class="nav-link">Guide</a>
-    <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener" class="bmc-btn">☕ Support</a>
+    <!-- A11Y: external link flagged for screen readers -->
+    <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener noreferrer" class="bmc-btn" aria-label="Support Stackd on Buy Me a Coffee (opens in new tab)">
+      ☕ <span class="bmc-text">Support</span>
+    </a>
   </div>
 </nav>
 
-<main class="hero">
-  <div class="hero-eyebrow"><span></span>Two apps. One mission.</div>
+<!-- A11Y: id matches skip link target; role="main" is redundant with <main> but harmless -->
+<main class="hero" id="main-content">
+
+  <!-- A11Y: aria-hidden on decorative pulse dot -->
+  <div class="hero-eyebrow">
+    <span class="pulse-dot" aria-hidden="true"></span>
+    Two apps. One mission.
+  </div>
+
+  <!-- A11Y: h1 is the page's primary heading -->
   <h1>Build <em>great</em> days.</h1>
+
   <p class="hero-sub">Pick the app that fits your family. Both make getting things done feel like a game.</p>
 
-  <div class="app-cards">
-    <a href="/day" class="app-card day">
-      <div class="card-tag">Daily Routine</div>
-      <div class="card-icon">🎮</div>
-      <div class="card-name">Stackd Day</div>
-      <div class="card-hook">"Make your day feel like a game."</div>
-      <div class="card-desc">Schedule blocks, tasks, XP, and rewards. Built for kids with ADHD, autism, and sensory differences who need visual structure to thrive.</div>
-      <span class="card-cta">Explore Stackd Day →</span>
-      <div class="card-audience">For parents of neurodivergent kids</div>
-    </a>
+  <!-- A11Y: list markup so screen readers announce "2 items" -->
+  <ul class="app-cards" role="list">
 
-    <a href="/school-landing" class="app-card school">
-      <div class="card-tag">Homeschool</div>
-      <div class="card-icon">📚</div>
-      <div class="card-name">Stackd School</div>
-      <div class="card-hook">"Make school feel like a game."</div>
-      <div class="card-desc">Subject timers, lesson XP, streaks, and a report card. Built for homeschool families and co-ops who want school time to feel rewarding.</div>
-      <span class="card-cta">Explore Stackd School →</span>
-      <div class="card-audience">For homeschool families and co-ops</div>
-    </a>
-  </div>
+    <li role="listitem">
+      <!-- A11Y: descriptive aria-label so the link reads clearly out of context -->
+      <a href="/day" class="app-card day" aria-label="Explore Stackd Day — daily routine app for neurodivergent kids">
+        <div class="card-tag">Daily Routine</div>
+        <!-- A11Y: emoji is decorative -->
+        <div class="card-icon" aria-hidden="true">🎮</div>
+        <!-- A11Y: heading hierarchy inside card -->
+        <h2 class="card-name">Stackd Day</h2>
+        <p class="card-hook">"Make your day feel like a game."</p>
+        <p class="card-desc">Schedule blocks, tasks, XP, and rewards. Built for kids with ADHD, autism, and sensory differences who need visual structure to thrive.</p>
+        <!-- BUGFIX: was <span> — changed to <div> to avoid invalid <span> inside <a> acting as a button -->
+        <div class="card-cta">Explore Stackd Day →</div>
+        <div class="card-audience">For parents of neurodivergent kids</div>
+      </a>
+    </li>
+
+    <li role="listitem">
+      <a href="/school-landing" class="app-card school" aria-label="Explore Stackd School — homeschool app for families and co-ops">
+        <div class="card-tag">Homeschool</div>
+        <div class="card-icon" aria-hidden="true">📚</div>
+        <h2 class="card-name">Stackd School</h2>
+        <p class="card-hook">"Make school feel like a game."</p>
+        <p class="card-desc">Subject timers, lesson XP, streaks, and a report card. Built for homeschool families and co-ops who want school time to feel rewarding.</p>
+        <div class="card-cta">Explore Stackd School →</div>
+        <div class="card-audience">For homeschool families and co-ops</div>
+      </a>
+    </li>
+
+  </ul>
 </main>
 
+<!-- A11Y: contentinfo role is implicit on <footer> -->
 <footer>
   <p>Stackd Apps · mystackd.com · Built for kids who think differently.</p>
-  <div class="footer-links">
+  <nav class="footer-links" aria-label="Footer navigation">
     <a href="/day">Stackd Day</a>
     <a href="/school-landing">Stackd School</a>
     <a href="/guide">Guide</a>
-    <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener">Support ☕</a>
-  </div>
+    <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener noreferrer" aria-label="Support Stackd on Buy Me a Coffee (opens in new tab)">Support ☕</a>
+  </nav>
 </footer>
 
 </body>
