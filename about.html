@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — Stackd</title>
+<meta name="description" content="Stackd was built for one kid. Turned out to help a lot more.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0a0f0a;
+  --bg2:      #111811;
+  --panel:    #161e16;
+  --border:   #1e2e1e;
+  --txt:      #e8f5e8;
+  --txt2:     #8ab88a;
+  --txt3:     #4a6e4a;
+  --accent:   #4ade80;
+  --touch-min: 44px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: 'Sora', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--accent);
+  color: #071409;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top .15s;
+}
+.skip-link:focus { top: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: var(--touch-min);
+}
+
+.nav-logo {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--txt);
+  letter-spacing: -.4px;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-link {
+  font-size: 13px;
+  color: var(--txt3);
+  text-decoration: none;
+  font-weight: 600;
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  transition: color .15s;
+}
+.nav-link:hover { color: var(--txt); }
+
+.hero {
+  padding: 60px 20px 36px;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.hero-tag {
+  display: inline-block;
+  background: rgba(74,222,128,.1);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 800;
+  letter-spacing: -.8px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.hero h1 span { color: var(--accent); }
+
+.about-body {
+  padding: 40px 0 60px;
+}
+.about-body p {
+  font-size: 15px;
+  color: var(--txt2);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 620px;
+}
+.about-body p strong { color: var(--txt); font-weight: 700; }
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.about-sig {
+  font-size: 14px;
+  color: var(--txt3);
+  line-height: 1.7;
+}
+.about-sig strong { color: var(--txt2); font-weight: 600; }
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 20px;
+  text-align: center;
+  margin-top: 8px;
+}
+footer p { font-size: 13px; color: var(--txt3); }
+footer a { color: var(--accent); text-decoration: none; }
+
+.bmc-btn {
+  background: #FFDD00;
+  color: #000;
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
+  min-height: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  transition: opacity .15s;
+}
+.bmc-btn:hover { opacity: .85; }
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 26px; letter-spacing: -.4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <a href="https://mystackd.com" class="nav-logo" aria-label="Stackd home">
+    stack<span>d</span>
+  </a>
+  <a href="https://mystackd.com" class="nav-link">← Back to site</a>
+</nav>
+
+<header class="hero" aria-labelledby="hero-heading">
+  <div class="hero-tag" aria-hidden="true">Our Story</div>
+  <h1 id="hero-heading">Built for one kid.<br><span>Turned out to help a lot more.</span></h1>
+</header>
+
+<main id="main-content">
+<div class="wrap">
+  <div class="about-body">
+    <p>I didn't set out to build an app. I set out to survive homeschooling my son.</p>
+    <p>When we pulled <strong>Lincoln</strong> out of traditional school, the thing we weren't prepared for was how much the lack of structure would affect him. He has ADHD and autism, and without a predictable routine, the anxiety was rough for all of us. We kept looking for something that would make the day feel manageable for a kid like him. Something visual. Something that made routine feel less like a chore and more like a game.</p>
+    <p>We couldn't find it. So I built it.</p>
+    <p>The first version was called <strong>Lincoln Ops</strong>, named after him, built entirely for him. It was clunky. It was definitely not pretty. But it worked. He started moving through transitions easier. He got excited to earn XP for things he used to fight. He started asking when school was starting.</p>
+    <p>That was the moment we knew it was something.</p>
+    <p>I'm <strong>Alaina</strong>, a full-time business student, small business owner, and mom stumbling through life in Washington, Indiana with my wife and our son. I'm not a developer by trade. I'm not a child psychologist. I'm just a parent who figured something out and wanted other families to have access to it too.</p>
+    <p>Stackd is still built around Lincoln. Every feature, every design decision, I run it through the question: would this actually work for a real kid on a hard day? If the answer is no, it doesn't ship.</p>
+    <p>If your kid thinks differently, I hope Stackd helps. That's really the whole point.</p>
+    <p>Stackd comes in two apps. <strong>Stackd Day</strong> for daily routines and <strong>Stackd School</strong> for homeschool sessions. Lincoln uses both.</p>
+
+    <hr class="divider">
+
+    <div class="about-sig">
+      Questions or feedback: <strong>support@mystackd.com</strong><br>
+      Built in Washington, Indiana.
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <a href="https://buymeacoffee.com/mystackd" target="_blank" rel="noopener noreferrer"
+    class="bmc-btn" aria-label="Support Stackd on Buy Me a Coffee (opens in new tab)">
+    ☕ Buy me a coffee →
+  </a>
+  <p>Built with love for kids who think differently. &nbsp;·&nbsp; <a href="https://mystackd.com">mystackd.com</a></p>
+</footer>
+
+</body>
+</html>
