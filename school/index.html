@@ -6,9 +6,14 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Stackd School — Live Demo</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Stackd - School</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlN0YWNrZCBTY2hvb2wiLCAic2hvcnRfbmFtZSI6ICJTdGFja2QiLCAiZGVzY3JpcHRpb24iOiAiSG9tZXNjaG9vbCB0cmFja2VyIGZvciBraWRzIiwgInN0YXJ0X3VybCI6ICIvc2Nob29sIiwgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwRDk0ODgiLCAidGhlbWVfY29sb3IiOiAiIzBEOTQ4OCIsICJjYXRlZ29yaWVzIjogWyJlZHVjYXRpb24iLCAia2lkcyIsICJwcm9kdWN0aXZpdHkiXX0=">
 <meta name="theme-color" content="#0D9488">
 <meta name="application-name" content="Stackd School">
+<meta name="apple-mobile-web-app-title" content="Stackd School">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>
 (function(){
   try{
@@ -84,12 +89,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 /* SPLASH */
 #splash{position:fixed;inset:0;background:var(--bg);z-index:9990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;pointer-events:none;}
 .sp-logo{display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp .5s .1s ease forwards;}
-.sp-s{width:48px;height:48px;background:var(--accent);border-radius:13px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:11px 10px;flex-shrink:0;box-shadow:0 0 24px rgba(13,148,136,.35);}
-.sp-s .bar{background:#fff;border-radius:2px;height:4px;width:65%;}
-.sp-s .bar:nth-child(1){margin-left:0;}
-.sp-s .bar:nth-child(2){margin-left:35%;}
-.sp-s .bar:nth-child(3){margin-left:10%;}
-.sp-s .bar:nth-child(4){margin-left:40%;}
+.sp-s{width:48px;height:48px;background:var(--accent);border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:22px;font-weight:800;color:#fff;box-shadow:0 0 24px rgba(13,148,136,.35);}
 .sp-wordmark{font-size:30px;font-weight:800;color:var(--txt);letter-spacing:-1px;}
 .sp-sub{font-size:13px;color:var(--txt3);font-weight:400;letter-spacing:.3px;opacity:0;animation:fadeUp .4s .3s ease forwards;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
@@ -117,15 +117,9 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 #safe-bottom{position:fixed;bottom:0;left:0;right:0;height:env(safe-area-inset-bottom,0px);background:var(--bg2);z-index:99;}
 
 /* TOPBAR */
-.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;
-  margin-top:36px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:56px;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;min-height:56px;}
 .tb-l{display:flex;align-items:center;gap:10px;min-width:0;overflow:hidden;}
-.tb-s{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2.5px;padding:7px 6px;flex-shrink:0;}
-.tb-s .bar{background:#fff;border-radius:1.5px;height:2.5px;width:65%;}
-.tb-s .bar:nth-child(1){margin-left:0;}
-.tb-s .bar:nth-child(2){margin-left:35%;}
-.tb-s .bar:nth-child(3){margin-left:10%;}
-.tb-s .bar:nth-child(4){margin-left:40%;}
+.tb-s{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
 .tb-info{display:flex;flex-direction:column;min-width:0;}
 .tb-title{font-size:15px;font-weight:800;color:var(--txt);letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tb-sub{font-size:10px;color:var(--txt3);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -363,7 +357,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 .pw-cta:active{transform:scale(.98);}
 .pw-restore{background:none;border:none;color:var(--txt3);font-family:'Sora',sans-serif;font-size:12px;cursor:pointer;width:100%;padding:6px;}
 .pw-dismiss{background:none;border:none;color:var(--txt4);font-family:'Sora',sans-serif;font-size:12px;cursor:pointer;width:100%;padding:6px;margin-top:2px;}
-.pw-legal{font-size:10px;color:var(--txt4);text-align:center;margin-top:10px;line-height:1.6;}
+.pw-legal{font-size:10px;color:var(--txt4);text-align:center;margin-top:10px;line-height:1.6;}.pw-legal a{color:var(--txt3);text-decoration:underline;}
 #paused-overlay{position:fixed;inset:0;z-index:9950;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 #paused-overlay.visible{display:flex;}
 .paused-box{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;text-align:center;box-shadow:var(--shadow-lg);max-width:300px;width:90%;}
@@ -643,38 +637,6 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
 /* Modern uses base tokens - no overrides needed */
 
 @media(max-width:600px){.two-col{grid-template-columns:1fr 1fr;}.stat-grid{grid-template-columns:repeat(3,1fr);}}
-/* -- DEMO BANNER -- */
-#demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#f0a500;color:#111;font-family:'Sora',sans-serif;font-size:12px;font-weight:700;text-align:center;padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:12px;}
-#demo-banner a{color:#111;text-decoration:underline;font-weight:800;white-space:nowrap;}
-
-/* ── EXIT POPUP ── */
-#exit-overlay{position:fixed;inset:0;z-index:99990;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
-#exit-overlay.show{display:flex;}
-#exit-box{background:#1a1714;border:1px solid #2e2a25;border-radius:24px;padding:36px 32px;width:100%;max-width:460px;position:relative;}
-#exit-box h2{font-size:24px;font-weight:800;color:#f0ebe4;letter-spacing:-.4px;margin-bottom:8px;}
-#exit-box p{font-size:14px;color:#7a7168;line-height:1.6;margin-bottom:24px;}
-.ep-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#4a4540;font-size:20px;cursor:pointer;padding:4px 8px;line-height:1;}
-.ep-close:hover{color:#f0ebe4;}
-.ep-field{margin-bottom:16px;}
-.ep-label{font-size:11px;font-weight:700;color:#7a7168;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;display:block;}
-.ep-input{width:100%;background:#111;border:1px solid #2e2a25;border-radius:10px;padding:12px 14px;font-family:'Sora',sans-serif;font-size:14px;color:#f0ebe4;outline:none;transition:border-color .15s;}
-.ep-input:focus{border-color:#0D9488;}
-.ep-input::placeholder{color:#4a4540;}
-.ep-radio-group{display:flex;gap:8px;flex-wrap:wrap;}
-.ep-radio{display:none;}
-.ep-radio-label{padding:8px 14px;border-radius:20px;border:1px solid #2e2a25;font-size:12px;font-weight:600;color:#7a7168;cursor:pointer;transition:all .15s;}
-.ep-radio:checked + .ep-radio-label{border-color:#0D9488;color:#14b8a6;background:rgba(13,148,136,.1);}
-.ep-select{width:100%;background:#111;border:1px solid #2e2a25;border-radius:10px;padding:12px 14px;font-family:'Sora',sans-serif;font-size:14px;color:#f0ebe4;outline:none;appearance:none;cursor:pointer;}
-.ep-select:focus{border-color:#0D9488;}
-.ep-submit{width:100%;background:#0D9488;border:none;border-radius:10px;padding:14px;font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:#fff;cursor:pointer;margin-top:8px;transition:all .15s;}
-.ep-submit:hover{background:#14b8a6;}
-.ep-submit:active{transform:scale(.98);}
-.ep-success{text-align:center;padding:20px 0;}
-.ep-success-icon{font-size:48px;margin-bottom:16px;}
-.ep-success h3{font-size:20px;font-weight:800;color:#f0ebe4;margin-bottom:8px;}
-.ep-success p{font-size:14px;color:#7a7168;}
-.ep-legal{font-size:10px;color:#4a4540;text-align:center;margin-top:12px;line-height:1.6;}
-
 </style>
 </head>
 <body>
@@ -704,7 +666,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
     <div class="pw-title" id="pw-title">Unlock Stackd School</div>
     <div class="pw-trigger" id="pw-trigger">Start your free trial to access this feature.</div>
     <div class="pw-features">
-      <div class="pw-feature"><div class="pw-feature-dot"></div>All 5 themes — Ops, Superhero, Enchanted, Sprout, Modern</div>
+      <div class="pw-feature"><div class="pw-feature-dot"></div>All 5 themes: Ops, Superhero, Enchanted, Sprout, Modern</div>
       <div class="pw-feature"><div class="pw-feature-dot"></div>Unlimited subjects and tasks</div>
       <div class="pw-feature"><div class="pw-feature-dot"></div>Rewards shop + streaks</div>
       <div class="pw-feature"><div class="pw-feature-dot"></div>Full daily report</div>
@@ -728,6 +690,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
     <button class="pw-restore" onclick="restorePurchase()">Restore purchase</button>
     <button class="pw-dismiss" id="pw-dismiss-btn" onclick="closePaywall()">Maybe later</button>
     <div class="pw-legal">14-day free trial, then billed automatically. Cancel anytime in your Google Play account. By continuing you agree to our Terms of Service and Privacy Policy.</div>
+    <div class="pw-legal pw-ios-legal" style="display:none;">By subscribing you agree to our <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank">Terms of Use</a> and <a href="https://mystackd.com/privacy" target="_blank">Privacy Policy</a></div>
   </div>
 </div>
 
@@ -841,19 +804,20 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
       <div class="wt-dot" id="wt-dot-1"></div>
       <div class="wt-dot" id="wt-dot-2"></div>
       <div class="wt-dot" id="wt-dot-3"></div>
+      <div class="wt-dot" id="wt-dot-4"></div>
     </div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
       <div class="wt-slide active" id="wt-slide-0">
         <div style="font-size:52px;text-align:center;margin-bottom:20px;">📚</div>
         <div class="wt-title">Welcome to Stackd School</div>
-        <div class="wt-body">Gamified homeschool tracking for kids. Subjects, timers, XP, and rewards — all in one place.</div>
+        <div class="wt-body">Gamified homeschool tracking for kids. Subjects, timers, XP, and rewards, all in one place.</div>
         <div class="wt-body" style="margin-top:10px;">Free to start. Upgrade anytime for the full experience.</div>
       </div>
       <div class="wt-slide" id="wt-slide-1">
         <div style="font-size:52px;text-align:center;margin-bottom:20px;">⚙️</div>
         <div class="wt-title">Set up as a parent first</div>
         <div class="wt-body">Tap the <strong>Parent</strong> button in the top right to configure subjects, tasks, and settings.</div>
-        <div class="wt-tip">The parent tab is open by default. Set a PIN in Parent - Settings to lock it from your kids.</div>
+        <div class="wt-tip">The parent tab is open by default. Want to lock it from your kids? Setting a PIN is a Premium feature, available after upgrading.</div>
       </div>
       <div class="wt-slide" id="wt-slide-2">
         <div style="font-size:52px;text-align:center;margin-bottom:20px;">⏱</div>
@@ -862,9 +826,15 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         <div class="wt-tip">Free plan includes 3 subjects and 3 tasks. Upgrade to Premium for unlimited subjects, rewards, themes, and more.</div>
       </div>
       <div class="wt-slide" id="wt-slide-3">
+        <div style="font-size:52px;text-align:center;margin-bottom:20px;">📱</div>
+        <div class="wt-title">Your data stays on this device</div>
+        <div class="wt-body">All subjects, XP, and progress are saved on this device only. Nothing is sent to the cloud. Your kid's data stays private.</div>
+        <div class="wt-tip">If you switch devices or reinstall, use <strong>Parent - Settings - Data</strong> to download a backup and restore it on the new device.</div>
+      </div>
+      <div class="wt-slide" id="wt-slide-4">
         <div style="font-size:52px;text-align:center;margin-bottom:20px;">🚀</div>
         <div class="wt-title">You're ready to go</div>
-        <div class="wt-body">Hand the device to your kid and tap <strong>Start School</strong>. The XP adds up fast — they'll get hooked on it.</div>
+        <div class="wt-body">Hand the device to your kid and tap <strong>Start School</strong>. The XP adds up fast. They'll get hooked on it.</div>
         <div class="wt-tip">Want themes, rewards, and streaks? Tap the upgrade banner on the home screen to start your free 14-day trial.</div>
       </div>
     </div>
@@ -875,16 +845,10 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
   </div>
 </div>
 
-<!-- DEMO BANNER -->
-<div id="demo-banner">
-  ⚡ Live Demo — All Premium features unlocked. Data resets on refresh.
-  <!-- get real app hidden until live -->
-</div>
-
 <!-- SPLASH -->
 <div id="splash">
   <div class="sp-logo">
-    <div class="sp-s" id="sp-s-icon"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+    <div class="sp-s" id="sp-s-icon">S</div>
     <div class="sp-wordmark">Stackd</div>
   </div>
   <div class="sp-sub" id="sp-sub-lbl">Build great days.</div>
@@ -900,7 +864,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
   <div id="safe-top"></div>
   <div class="topbar">
     <div class="tb-l">
-      <div class="tb-s" id="tb-s"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
+      <div class="tb-s" id="tb-s">S</div>
       <div class="tb-info">
         <div class="tb-title" id="app-title">STACKD</div>
         <div class="tb-sub" id="tb-sub">School</div>
@@ -1190,7 +1154,15 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         </div>
       </div>
       <div class="editor-card">
-        <div class="section-lbl" style="margin-top:0;">Reset</div>
+        <div class="section-lbl" style="margin-top:0;">Data</div>
+        <div style="font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:12px;">All data (subjects, XP, and progress) is stored on this device only. Nothing is sent to the cloud. If you switch devices or reinstall, use the backup below to transfer your setup.</div>
+        <button class="btn btn-primary" onclick="backupData()" style="margin-bottom:0;">⬇ Download Backup</button>
+        <label class="btn btn-ghost" style="display:block;text-align:center;cursor:pointer;margin-top:10px;">
+          ⬆ Restore from Backup
+          <input type="file" accept=".json" style="display:none;" onchange="restoreData(event)">
+        </label>
+        <div style="margin-top:8px;font-size:11px;color:var(--txt3);text-align:center;line-height:1.6;">Backup saves your entire setup. Store it in Files or iCloud Drive.</div>
+        <div class="section-lbl" style="margin-top:16px;">Reset</div>
         <button class="btn btn-danger" onclick="fullReset()">Factory reset (clears all data)</button>
         <button class="btn btn-ghost" onclick="showWalkthrough()" style="margin-top:8px;">Show quick start guide</button>
       </div>
@@ -1343,13 +1315,21 @@ function cancelParentChanges(){
   _navDirect('home');
 }
 function saveParentChanges(){
-  showToast('Demo mode — changes not saved.');
+  if(!STAGING)return;
+  DB.subjects=STAGING.subjects;
+  DB.tasks=STAGING.tasks;
+  DB.rewards=STAGING.rewards;
+  DB.config=STAGING.config;
+  DB.save();
   STAGING=null;
-  var bar=document.getElementById('parent-save-bar');if(bar)bar.style.display='none';
-  nav('brief');
+  el('parent-save-bar').style.display='none';
+  showToast('Changes saved.');
+  applyStackTheme(DB.config.stackTheme||'minimal');
+  updateNavLabels();
+  updateKidName();
+  _navDirect('home');
 }
-
-
+// Direct nav — skips dirty guard, used after save/discard
 function _navDirect(screen){
   var screens=['home','lessons','tasks','rewards','report','parent'];
   screens.forEach(function(s){var sc=el('s-'+s);if(sc&&sc.classList)sc.classList.remove('active');var nb=el('nb-'+s);if(nb&&nb.classList)nb.classList.remove('active');});
@@ -2104,6 +2084,44 @@ function changePin(){
   showToast('PIN updated. Save to keep changes.');
 }
 
+function backupData(){
+  var payload={
+    version:1,
+    date:new Date().toISOString(),
+    subjects:DB.subjects,
+    tasks:DB.tasks,
+    rewards:DB.rewards,
+    config:Object.assign({},DB.config,{pin:'****'}),
+  };
+  var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='stackd-school-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();URL.revokeObjectURL(url);
+  showToast('Backup downloaded ✓');
+}
+function restoreData(event){
+  var file=event.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      if(data.subjects)DB.subjects=data.subjects;
+      if(data.tasks)DB.tasks=data.tasks;
+      if(data.rewards&&data.rewards.length)DB.rewards=data.rewards;
+      if(data.config){
+        var pin=DB.config.pin;
+        DB.config=Object.assign({},DB.config,data.config,{pin:pin});
+      }
+      DB.save();
+      renderParent();showToast('Restored successfully ✓');
+    }catch(err){showToast('Invalid backup file.');}
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
 function fullReset(){
   if(!confirm('This will erase ALL data. Are you sure?'))return;
   localStorage.removeItem(STORAGE_KEY);
@@ -2245,7 +2263,7 @@ var PREMIUM = {
 // Selected plan on paywall
 var _selectedPlan = 'annual';
 
-function isPremium(){return true;} // Demo: always premium
+function isPremium(){return PREMIUM.isActive();}
 
 // ── REVENUECAT INIT ──
 async function initRevenueCat(){
@@ -2589,7 +2607,7 @@ function pickTheme(t){
 }
 
 // ── WALKTHROUGH ──
-var wtStep=0,WT_TOTAL=4;
+var wtStep=0,WT_TOTAL=5;
 function showWalkthrough(){el('walkthrough-overlay').style.display='block';wtGoTo(0);}
 function wtGoTo(n){
   for(var i=0;i<WT_TOTAL;i++){
@@ -2655,129 +2673,41 @@ function checkForUpdate(){
 }
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'){_updateChecked=false;setTimeout(checkForUpdate,1000);}});
 setTimeout(checkForUpdate,30000);
+if(window.Capacitor&&window.Capacitor.getPlatform()==='ios'){document.querySelectorAll('.pw-ios-legal').forEach(function(el){el.style.display='block';});}
 </script>
-
-<!-- EXIT INTENT POPUP -->
-<div id="exit-overlay">
-  <div id="exit-box">
-    <button class="ep-close" onclick="closeExitPopup()">✕</button>
-    <div id="ep-form-view">
-      <h2>Stay in the loop.</h2>
-      <p>Get notified when Stackd launches on the App Store and Google Play.</p>
-      <form id="ep-form" onsubmit="submitExitForm(event)">
-        <div class="ep-field">
-          <label class="ep-label">Your email</label>
-          <input class="ep-input" type="email" name="email" placeholder="you@example.com" required>
-        </div>
-        <div class="ep-field">
-          <label class="ep-label">Which app interests you?</label>
-          <div class="ep-radio-group">
-            <input class="ep-radio" type="radio" name="app_interest" id="ep-plan" value="Stackd Plan">
-            <label class="ep-radio-label" for="ep-plan">Stackd Plan</label>
-            <input class="ep-radio" type="radio" name="app_interest" id="ep-school" value="Stackd School">
-            <label class="ep-radio-label" for="ep-school">Stackd School</label>
-            <input class="ep-radio" type="radio" name="app_interest" id="ep-both" value="Both" checked>
-            <label class="ep-radio-label" for="ep-both">Both</label>
-          </div>
-        </div>
-        <div class="ep-field">
-          <label class="ep-label">Biggest challenge with your kid's routine? <span style="color:#4a4540;font-weight:400;">(optional)</span></label>
-          <input class="ep-input" type="text" name="routine_challenge" placeholder="e.g. Getting started in the morning">
-        </div>
-        <div class="ep-field">
-          <label class="ep-label">How did you find us? <span style="color:#4a4540;font-weight:400;">(optional)</span></label>
-          <select class="ep-select" name="how_found">
-            <option value="">Select one</option>
-            <option value="Google search">Google search</option>
-            <option value="Social media">Social media</option>
-            <option value="Word of mouth">Word of mouth</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <button type="submit" class="ep-submit">Notify me when it launches →</button>
-        <div class="ep-legal">No spam. Launch news only. Unsubscribe anytime.</div>
-      </form>
-    </div>
-    <div id="ep-success-view" class="ep-success" style="display:none;">
-      <div class="ep-success-icon">🎉</div>
-      <h3>You're on the list!</h3>
-      <p>We'll let you know the moment Stackd hits the App Store and Google Play.</p>
-    </div>
-  </div>
-</div>
-
 
 <script>
-var _exitShown = false;
-var _formspree = 'https://formspree.io/f/mnjogzpk';
-var _sheet = 'https://script.google.com/macros/s/AKfycby4velI0pp5YrDtCZCvexOIHSTvasHDLrWcRZ1BlpL7mFgAOg60xonn1F3kk3X8iNeo/exec';
+/* ── DEMO MODE OVERRIDE ── */
+(function(){
+  // Force premium on
+  if(typeof PREMIUM!=='undefined') PREMIUM.setActive(true);
+  isPremium = function(){ return true; };
 
-function showExitPopup(){
-  if(_exitShown || sessionStorage.getItem('ep_shown'))return;
-  _exitShown=true;
-  sessionStorage.setItem('ep_shown','1');
-  document.getElementById('exit-overlay').classList.add('show');
-}
+  // Banner
+  var banner = document.createElement('div');
+  banner.id = 'demo-banner';
+  banner.innerHTML = '🔓 <strong>Demo Mode</strong> — All Pro features unlocked';
+  banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#0D9488;color:#fff;font-size:12px;font-family:Sora,sans-serif;text-align:center;padding:8px 16px;';
+  document.body.prepend(banner);
 
-function closeExitPopup(){
-  document.getElementById('exit-overlay').classList.remove('show');
-}
+  // Push content down so banner doesn't overlap
+  document.body.style.paddingTop = '36px';
 
-// Desktop: exit intent
-document.addEventListener('mouseleave',function(e){
-  if(e.clientY<=0)showExitPopup();
-});
-
-// Mobile: 70% scroll depth
-window.addEventListener('scroll',function(){
-  var pct=(window.scrollY+window.innerHeight)/document.body.scrollHeight;
-  if(pct>=0.7)showExitPopup();
-},{passive:true});
-
-// Click outside to close
-document.getElementById('exit-overlay').addEventListener('click',function(e){
-  if(e.target===this)closeExitPopup();
-});
-
-async function submitExitForm(e){
-  e.preventDefault();
-  var form=e.target;
-  var btn=form.querySelector('.ep-submit');
-  btn.textContent='Sending...';btn.disabled=true;
-
-  var source = window.location.pathname || '/';
-  var data={
-    email: form.email.value,
-    app_interest: form.app_interest.value,
-    routine_challenge: form.routine_challenge.value,
-    how_found: form.how_found.value,
-    source_page: source
-  };
-
-  try{
-    // Send to Formspree
-    await fetch(_formspree,{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(data)
+  // Run premium UI update after app initialises
+  window.addEventListener('load', function(){
+    if(typeof updatePremiumUI==='function') updatePremiumUI();
+    // Disable purchase/restore buttons
+    document.querySelectorAll('[onclick="startPurchase()"]').forEach(function(el){
+      el.textContent = '✓ Unlocked for demo';
+      el.onclick = null;
+      el.style.opacity = '.5';
+      el.style.cursor = 'default';
     });
-  }catch(err){}
-
-  try{
-    // Log to Google Sheet
-    await fetch(_sheet,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(data)
+    document.querySelectorAll('[onclick="restorePurchase()"]').forEach(function(el){
+      el.style.display = 'none';
     });
-  }catch(err){}
-
-  document.getElementById('ep-form-view').style.display='none';
-  document.getElementById('ep-success-view').style.display='block';
-  setTimeout(closeExitPopup, 3000);
-}
+  });
+})();
 </script>
-
 </body>
 </html>
