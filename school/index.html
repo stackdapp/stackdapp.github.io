@@ -664,7 +664,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
     <div class="pw-handle"></div>
     <div class="pw-badge">⭐ Premium</div>
     <div class="pw-title" id="pw-title">Unlock Stackd School</div>
-    <div class="pw-trigger" id="pw-trigger">Start your free trial to access this feature.</div>
+    <div class="pw-trigger" id="pw-trigger">Subscribe to access this feature.</div>
     <div class="pw-features">
       <div class="pw-feature"><div class="pw-feature-dot"></div>All 5 themes: Ops, Superhero, Enchanted, Sprout, Modern</div>
       <div class="pw-feature"><div class="pw-feature-dot"></div>Unlimited subjects and tasks</div>
@@ -686,10 +686,10 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         <div class="pw-plan-sub">$5/mo · save 37%</div>
       </div>
     </div>
-    <button class="pw-cta" id="pw-cta-btn" onclick="startPurchase()">Start 14-Day Free Trial</button>
+    <button class="pw-cta" id="pw-cta-btn" onclick="startPurchase()">Unlock Pro</button>
     <button class="pw-restore" onclick="restorePurchase()">Restore purchase</button>
     <button class="pw-dismiss" id="pw-dismiss-btn" onclick="closePaywall()">Maybe later</button>
-    <div class="pw-legal">14-day free trial, then billed automatically. Cancel anytime in your Google Play account. By continuing you agree to our Terms of Service and Privacy Policy.</div>
+    <div class="pw-legal">Billed automatically. Cancel anytime in your Google Play account. By continuing you agree to our Terms of Service and Privacy Policy.</div>
     <div class="pw-legal pw-ios-legal" style="display:none;">By subscribing you agree to our <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank">Terms of Use</a> and <a href="https://mystackd.com/privacy" target="_blank">Privacy Policy</a></div>
   </div>
 </div>
@@ -835,7 +835,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
         <div style="font-size:52px;text-align:center;margin-bottom:20px;">🚀</div>
         <div class="wt-title">You're ready to go</div>
         <div class="wt-body">Hand the device to your kid and tap <strong>Start School</strong>. The XP adds up fast. They'll get hooked on it.</div>
-        <div class="wt-tip">Want themes, rewards, and streaks? Tap the upgrade banner on the home screen to start your free 14-day trial.</div>
+        <div class="wt-tip">Want themes, rewards, and streaks? Tap the upgrade banner on the home screen to unlock Pro.</div>
       </div>
     </div>
     <div style="display:flex;gap:10px;margin-top:24px;">
@@ -921,7 +921,7 @@ body{font-family:'Sora',sans-serif;color:var(--txt);overscroll-behavior:none;-we
       <div id="premium-badge" style="display:none;background:linear-gradient(135deg,var(--xp-dim),var(--panel));border:1px solid var(--xp);border-radius:var(--radius);padding:16px;margin-bottom:12px;cursor:pointer;" onclick="showPaywall('Premium')">
         <div style="font-size:11px;font-weight:700;color:var(--xp);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;">⭐ Free Plan</div>
         <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:3px;">Upgrade to Premium</div>
-        <div style="font-size:12px;color:var(--txt3);">Unlock all themes, unlimited subjects, rewards, and more. 14-day free trial.</div>
+        <div style="font-size:12px;color:var(--txt3);">Unlock all themes, unlimited subjects, rewards, and more.</div>
       </div>
     </div>
   </div>
@@ -2291,8 +2291,8 @@ async function initRevenueCat(){
 function showPaywall(featureName, canDismiss){
   var title = featureName ? 'Unlock ' + featureName : 'Unlock Stackd School Premium';
   var trigger = featureName
-    ? featureName + ' is a Premium feature. Start your free trial to access it.'
-    : 'Start your free trial to unlock everything.';
+    ? featureName + ' is a Pro feature. Subscribe to access it.'
+    : 'Subscribe to unlock everything.';
   el('pw-title').textContent = title;
   el('pw-trigger').textContent = trigger;
   el('pw-dismiss-btn').style.display = canDismiss === false ? 'none' : '';
@@ -2308,7 +2308,7 @@ function selectPlan(plan){
   _selectedPlan = plan;
   el('pw-plan-month').classList.toggle('selected', plan==='monthly');
   el('pw-plan-year').classList.toggle('selected', plan==='annual');
-  el('pw-cta-btn').textContent = 'Start 14-Day Free Trial';
+  el('pw-cta-btn').textContent = 'Unlock Pro';
 }
 
 async function startPurchase(){
@@ -2322,7 +2322,7 @@ async function startPurchase(){
       closePaywall();
       showToast('Premium activated! (dev mode)');
       updatePremiumUI();
-      el('pw-cta-btn').textContent='Start 14-Day Free Trial';
+      el('pw-cta-btn').textContent='Unlock Pro';
       el('pw-cta-btn').disabled=false;
       return;
     }
@@ -2346,7 +2346,7 @@ async function startPurchase(){
       showToast('Purchase failed. Please try again.');
     }
   }
-  el('pw-cta-btn').textContent='Start 14-Day Free Trial';
+  el('pw-cta-btn').textContent='Unlock Pro';
   el('pw-cta-btn').disabled=false;
 }
 
