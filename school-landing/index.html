@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stackd School — Make school feel like a game.</title>
+<title>Stackd School: Make school feel like a game.</title>
 <meta name="description" content="A homeschool app with subject timers, XP, streaks, and reports. Make school feel like a game with Stackd School.">
 <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAABkElEQVR4nN2Xy04CMRSGu6fdCe+Cj2HGRBcafQV8AkXSRtiQVrwksMUN8ZJ4GVe4EBMdGYm+gSEaVwpshhBqjjITFDGdpE6JJ/lXPe3/9fQsehAailghmyCCrhNOXSxohwgmdQjOwoLVCWdp8EA/BeZ0FnPa0mU6FobTFhbMGjEnnPb/2jwQp/0AIlbIJqK4+eizsDecz8TRx5tHbD5UiTVEBLszBQCNiTBnbWMAnLaQsfIPhH5bnN4rySX7UC7bR0qC3GS5qA9g8exA2dzXwum+PoBkuWi2AsR0D5BJA5g/qcjd+7osPbhKglzYow1gu+Eom/vaajhmKzB3XPlHPUBMAKxcnMvr56Z0X56UBLmpqq0P4LL5qGzuC/ZoA0hVbbMVIKZ7gEwaQM65kl6vJ1UDcrNOTR9Ap+vJsNHueuMBcMgfMdwmbAU2bmpjf8YIpiCjn1LCWdpgE66aG0w4e8U7uanP0UwwK/LRbJPNfJ0PBbOgKSK5+XfzACKficO4hAW91TmwwFlwJrx5UPZBvANOhCIVbgZjgQAAAABJRU5ErkJggg==">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -267,6 +267,13 @@ nav{
 .cta-title span{color:var(--accent);}
 .cta-sub{font-size:15px;color:var(--txt2);margin-bottom:36px;}
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.store-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.store-btn{display:inline-flex;align-items:center;gap:10px;background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:10px 20px;text-decoration:none;transition:all .2s;color:#fff;}
+.store-btn:hover{background:#2a2a2a;transform:translateY(-2px);}
+.store-btn svg{flex-shrink:0;}
+.store-btn-text{display:flex;flex-direction:column;line-height:1.2;}
+.store-btn-sub{font-size:10px;color:#aaa;font-weight:400;}
+.store-btn-name{font-size:14px;font-weight:700;color:#fff;}
 
 footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;position:relative;z-index:1;}
 footer p{font-size:12px;color:var(--txt3);}
@@ -314,11 +321,21 @@ footer a{color:var(--accent);text-decoration:none;}
         <a href="/school" class="btn-primary">Try the demo →</a>
         <a href="/school-guide" class="btn-ghost">See how it works</a>
       </div>
+      <div class="store-btns">
+        <a href="https://play.google.com/store/apps/details?id=com.stackd.school" target="_blank" rel="noopener" class="store-btn" aria-label="Get Stackd School on Google Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.18 1.07C2.45 1.48 2 2.26 2 3.14v17.72c0 .88.45 1.66 1.18 2.07l.1.06 9.92-9.92v-.23L3.28 1.01l-.1.06z" fill="#4285F4"/><path d="M16.4 16.28l-3.3-3.3v-.24l3.3-3.3.07.04 3.91 2.22c1.12.63 1.12 1.67 0 2.31l-3.91 2.22-.07.05z" fill="#FBBC04"/><path d="M16.47 16.23L13.1 12.86 3.18 22.79c.37.39.94.42 1.59.05l11.7-6.61" fill="#34A853"/><path d="M16.47 7.77L4.77 1.16C4.12.79 3.55.82 3.18 1.21l9.92 9.92 3.37-3.36z" fill="#EA4335"/></svg>
+          <span class="store-btn-text"><span class="store-btn-sub">Get it on</span><span class="store-btn-name">Google Play</span></span>
+        </a>
+        <a href="https://apps.apple.com/us/app/stackd-school/id6744264810" target="_blank" rel="noopener" class="store-btn" aria-label="Download Stackd School on the App Store" style="opacity:.5;pointer-events:none;" title="Coming soon to the App Store">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <span class="store-btn-text"><span class="store-btn-sub">Coming soon</span><span class="store-btn-name">App Store</span></span>
+        </a>
+      </div>
       <div class="hero-proof">
-        <div class="proof-item"><div class="proof-dot"></div>Free to start</div>
-        <div class="proof-item"><div class="proof-dot"></div>No account needed</div>
-        <div class="proof-item"><div class="proof-dot"></div>Works offline</div>
-        <div class="proof-item"><div class="proof-dot"></div>14-day free trial on Pro</div>
+        <div class="proof-item">Free to start</div>
+        <div class="proof-item">No account needed</div>
+        <div class="proof-item">Works offline</div>
+        <div class="proof-item">14-day free trial on Pro</div>
       </div>
     </div>
 
@@ -353,7 +370,7 @@ footer a{color:var(--accent);text-decoration:none;}
         </div>
         <div class="p-nb">
           <div class="p-nb-i">🏠<span>Home</span></div>
-          <div class="p-nb-i on">📚<span>School</span></div>
+          <div class="p-nb-i on">📚<span>Lessons</span></div>
           <div class="p-nb-i">⭐<span>Rewards</span></div>
           <div class="p-nb-i">📊<span>Report</span></div>
         </div>
@@ -447,6 +464,16 @@ footer a{color:var(--accent);text-decoration:none;}
     <div class="cta-btns">
       <a href="/school" class="btn-primary">Try the demo →</a>
       <a href="/school-guide" class="btn-ghost">Quick start guide</a>
+    </div>
+    <div class="store-btns">
+      <a href="https://play.google.com/store/apps/details?id=com.stackd.school" target="_blank" rel="noopener" class="store-btn" aria-label="Get Stackd School on Google Play">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3.18 1.07C2.45 1.48 2 2.26 2 3.14v17.72c0 .88.45 1.66 1.18 2.07l.1.06 9.92-9.92v-.23L3.28 1.01l-.1.06z" fill="#4285F4"/><path d="M16.4 16.28l-3.3-3.3v-.24l3.3-3.3.07.04 3.91 2.22c1.12.63 1.12 1.67 0 2.31l-3.91 2.22-.07.05z" fill="#FBBC04"/><path d="M16.47 16.23L13.1 12.86 3.18 22.79c.37.39.94.42 1.59.05l11.7-6.61" fill="#34A853"/><path d="M16.47 7.77L4.77 1.16C4.12.79 3.55.82 3.18 1.21l9.92 9.92 3.37-3.36z" fill="#EA4335"/></svg>
+        <span class="store-btn-text"><span class="store-btn-sub">Get it on</span><span class="store-btn-name">Google Play</span></span>
+      </a>
+      <a href="https://apps.apple.com/us/app/stackd-school/id6744264810" target="_blank" rel="noopener" class="store-btn" aria-label="Download Stackd School on the App Store" style="opacity:.5;pointer-events:none;" title="Coming soon to the App Store">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span class="store-btn-text"><span class="store-btn-sub">Coming soon</span><span class="store-btn-name">App Store</span></span>
+      </a>
     </div>
   </div>
 </section>
